@@ -1,0 +1,19 @@
+.gradle
+.settings
+.classpath
+.project
+build
+bin
+minecraft 1.8 source
+/com
+/resources
+proxyServer/bin
+proxyServer/rundir
+desktopRuntime/_eagstorage*
+desktopRuntime/eclipseProject/bin*
+desktopRuntime/hs_err_*
+desktopRuntime/crash-reports/*
+desktopRuntime/options.txt
+desktopRuntime/_eagstorage*
+desktopRuntime/filesystem/*
+desktopRuntime/downloads/*

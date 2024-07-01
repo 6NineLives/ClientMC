@@ -1,0 +1,23 @@
+[
+    {
+        "modid": "archclient",
+        "name": "ArchClient",
+        "description": "The free FPS boosting modpack for Minecraft 1.7.10.",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": [
+            "Telecode/Lifix",
+            "JHalt",
+            "Decencies",
+            "tuzeynah",
+            "Freddie",
+            "Noxiuam"
+        ],
+        "credits": "Decencies, tuzeynah, Noxiuam, Freddie: ArchClient Source (https://github.com/Decencies/ArchClient), \nJHalt: Creator of ArchClient, \nTelecode/Lifix: ArchClient Forge",
+        "logoFile": "assets/minecraft/client/logo_red_circle.png",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
