@@ -1,14 +1,9 @@
 package com.archclient.client.config;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Represents a profile to be stored to the disk.
  * @author Decencies
  */
-@Getter
-@Setter
 public class Profile {
 
     private int index = 0;
@@ -18,6 +13,26 @@ public class Profile {
     public Profile(String name, boolean editable) {
         this.name = name;
         this.editable = editable;
+    }
+
+    public int getIndex() {
+        return this.index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public boolean isEditable() {
+        return this.editable;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

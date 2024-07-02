@@ -4,18 +4,25 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 
 import java.io.IOException;
 import java.util.*;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketUpdateNametags extends Packet {
 
     private Map<EaglercraftUUID, List<String>> playersMap;
+
+    public PacketUpdateNametags(Map<EaglercraftUUID, List<String>> playersMap) {
+        this.playersMap = playersMap;
+    }
+
+    public PacketUpdateNametags() {
+    }
+
+    public Map<EaglercraftUUID, List<String>> getPlayersMap() {
+        return this.playersMap;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

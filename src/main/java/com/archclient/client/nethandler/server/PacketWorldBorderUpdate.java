@@ -4,13 +4,9 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketWorldBorderUpdate extends Packet {
 
     private String id;
@@ -19,6 +15,37 @@ public class PacketWorldBorderUpdate extends Packet {
     private double maxX;
     private double maxZ;
     private int durationTicks;
+
+    public PacketWorldBorderUpdate(String id, double minX, double minZ, double maxX, double maxZ, int durationTicks) {
+        this.id = id;
+        this.minX = minX;
+        this.minZ = minZ;
+        this.maxX = maxX;
+        this.maxZ = maxZ;
+        this.durationTicks = durationTicks;
+    }
+
+    public PacketWorldBorderUpdate() {
+    }
+
+    public String getId() {
+        return this.id;
+    }
+    public double getMinX() {
+        return this.minX;
+    }
+    public double getMinZ() {
+        return this.minZ;
+    }
+    public double getMaxX() {
+        return this.maxX;
+    }
+    public double getMaxZ() {
+        return this.maxZ;
+    }
+    public int getDurationTicks() {
+        return this.durationTicks;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

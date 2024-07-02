@@ -6,14 +6,17 @@ import com.archclient.client.ui.fading.MinMaxFade;
 import com.archclient.client.ui.mainmenu.element.ScrollableElement;
 import com.archclient.client.ui.util.RenderUtil;
 import com.archclient.client.ui.util.font.FontRegistry;
-import lombok.Setter;
 import net.minecraft.util.ResourceLocation;
 
 public class AccountList extends AbstractElement {
-    @Setter
     private ResourceLocation headLocation;
-    @Setter
+    public void setHeadLocation(ResourceLocation headLocation) {
+        this.headLocation = headLocation;
+    }
     private String displayName;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
     private final ColorFade outlineColour;
     private final ColorFade rectGradientStartColour;
     private final ColorFade rectGradientEndColour;

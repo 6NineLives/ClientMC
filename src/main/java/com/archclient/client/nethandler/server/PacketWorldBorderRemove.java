@@ -4,16 +4,23 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketWorldBorderRemove extends Packet {
 
     private String id;
+
+    public PacketWorldBorderRemove(String id) {
+        this.id = id;
+    }
+
+    public PacketWorldBorderRemove() {
+    }
+
+    public String getId() {
+        return this.id;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

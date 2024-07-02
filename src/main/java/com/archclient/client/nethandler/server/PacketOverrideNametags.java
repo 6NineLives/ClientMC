@@ -4,20 +4,32 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketOverrideNametags extends Packet {
 
     private EaglercraftUUID player;
     private List<String> tags;
+
+    public PacketOverrideNametags(EaglercraftUUID player, List<String> tags) {
+        this.player = player;
+        this.tags = tags;
+    }
+
+    public PacketOverrideNametags() {
+    }
+
+    public EaglercraftUUID getPlayer() {
+        return this.player;
+    }
+
+    public List<String> getTags() {
+        return this.tags;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

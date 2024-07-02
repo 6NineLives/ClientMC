@@ -48,10 +48,6 @@ import com.archclient.impl.ref.DrawingUtils;
 import com.archclient.impl.ref.InstanceCreator;
 import com.archclient.main.identification.MinecraftVersion;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
 public class ArchClient
 {
     public static final MinecraftVersion MINECRAFT_VERSION = MinecraftVersion.v1_8_9;
@@ -79,22 +75,81 @@ public class ArchClient
     private AssetsWebSocket websocket;
 
     private FriendsManager friendsManager;
-    @Getter
-    @Setter
     private Status status;
 
-    @Setter
     private boolean consoleAllowed;
 
     private List<String> consoleLines;
 
-    @Setter
     private boolean acceptingFriendRequests;
 
     private final Map<String, ResourceLocation> playerSkins = new HashMap<>();
 
-    @Getter
     private boolean initialized = false;
+
+    public List<Profile> getProfiles() {
+        return this.profiles;
+    }
+    public Profile getActiveProfile() {
+        return this.activeProfile;
+    }
+    public GlobalSettings getGlobalSettings() {
+        return this.globalSettings;
+    }
+    public ModuleManager getModuleManager() {
+        return this.moduleManager;
+    }
+    public ConfigManager getConfigManager() {
+        return this.configManager;
+    }
+    public EventBus getEventBus() {
+        return this.eventBus;
+    }
+    public List<ResourceLocation> getPresetLocations() {
+        return this.presetLocations;
+    }
+    public NetHandler getNetHandler() {
+        return this.netHandler;
+    }
+    public TitleManager getTitleManager() {
+        return this.titleManager;
+    }
+    public WorldBorderManager getBorderManager() {
+        return this.borderManager;
+    }
+    public List<Cosmetic> getCosmetics() {
+        return this.cosmetics;
+    }
+    public AssetsWebSocket getWebsocket() {
+        return this.websocket;
+    }
+    public FriendsManager getFriendsManager() {
+        return this.friendsManager;
+    }
+    public Status getStatus() {
+        return this.status;
+    }
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    public void setConsoleAllowed(boolean consoleAllowed) {
+        this.consoleAllowed = consoleAllowed;
+    }
+    public List<String> getConsoleLines() {
+        return this.consoleLines;
+    }
+    public boolean isAcceptingFriendRequests() {
+        return this.acceptingFriendRequests;
+    }
+    public void setAcceptingFriendRequests(boolean acceptingFriendRequests) {
+        this.acceptingFriendRequests = acceptingFriendRequests;
+    }
+    public Map<String, ResourceLocation> getPlayerSkins() {
+        return this.playerSkins;
+    }
+    public boolean isInitialized() {
+        return this.initialized;
+    }
 
     public boolean isConsoleAllowed() {
         return true;
@@ -111,7 +166,7 @@ public class ArchClient
     public void acInfo(String msg, Class<?> loadedClass) {
         this.acInfo(msg + " (" + loadedClass.getCanonicalName() + ")");
     }
-    
+
     public void initialize() {
         if (!this.initialized) {
             Ref.setMinecraftVersion(MINECRAFT_VERSION);
@@ -127,9 +182,9 @@ public class ArchClient
             Ref.setTessellator(Tessellator.getInstance());
             Ref.setInstanceCreator(new InstanceCreator());
             //Ref.setUtils(new RefUtils());
-    
+
             Ref.getImplementations().setTextureUtil(new TextureUtil());
-    
+
             this.presetLocations = new ArrayList<>();
             this.cosmetics = new ArrayList<>();
             this.profiles = new ArrayList<>();
@@ -333,7 +388,7 @@ public class ArchClient
     public void removeCosmeticsFromPlayer(final String playerId) {
         this.cosmetics.removeIf(cosmetic -> cosmetic.getPlayerId().equals(playerId));
     }
-    
+
     public void renderGameOverlay() {
         Minecraft mc = Minecraft.getMinecraft();
         ScaledResolution scaledResolution = new ScaledResolution(mc);

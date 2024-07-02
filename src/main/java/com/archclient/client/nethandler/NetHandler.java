@@ -14,7 +14,6 @@ import com.archclient.client.util.hologram.Hologram;
 import com.archclient.client.util.title.Title;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
-import lombok.Getter;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 import net.lax1dude.eaglercraft.v1_8.Keyboard;
 import net.lax1dude.eaglercraft.v1_8.netty.Unpooled;
@@ -33,16 +32,27 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
     @Getter private List<VoiceChannel> voiceChannels;
     @Getter private VoiceChannel voiceChannel;
     */
-    @Getter private List<EaglercraftUUID> uuidList;
-    @Getter private List<EaglercraftUUID> anotherUuidList;
-    @Getter private String world = "";
+    private List<EaglercraftUUID> uuidList;
+    private List<EaglercraftUUID> anotherUuidList;
+    private String world = "";
     private boolean serverHandlesWaypoints = false;
     public boolean voiceChatEnabled = true;
     private boolean competitiveGamemode = false;
     private boolean isArchClientChannel = false;
 
-    @Getter
     private Map<EaglercraftUUID, List<String>> nametagsMap = new HashMap<>();
+    public List<EaglercraftUUID> getUuidList() {
+        return this.uuidList;
+    }
+    public List<EaglercraftUUID> getAnotherUuidList() {
+        return this.anotherUuidList;
+    }
+    public String getWorld() {
+        return this.world;
+    }
+    public Map<EaglercraftUUID, List<String>> getNametagsMap() {
+        return this.nametagsMap;
+    }
 
     public NetHandler() {
         //xxxthis.voiceChannels = new ArrayList<>();

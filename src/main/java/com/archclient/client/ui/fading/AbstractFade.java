@@ -1,23 +1,29 @@
 package com.archclient.client.ui.fading;
 
-import lombok.Getter;
-
 public abstract class AbstractFade {
-    @Getter
     protected long startTime;
     protected long lIIIIIIIIIlIllIIllIlIIlIl;
-    @Getter
     protected long duration;
     protected boolean expireAtEndTime = true;
     protected float IIIIllIIllIIIIllIllIIIlIl;
-    @Getter
     protected long timeElapsed;
     protected final float currentFadePercentage;
     private boolean shouldResetOnceCalled;
     private int lIIIIllIIlIlIllIIIlIllIlI = 1;
     private long inputtedTimeElapsed;
-    @Getter
     private boolean currentlyInverted;
+    public long getStartTime() {
+        return this.startTime;
+    }
+    public long getDuration() {
+        return this.duration;
+    }
+    public long getTimeElapsed() {
+        return this.timeElapsed;
+    }
+    public boolean isCurrentlyInverted() {
+        return this.currentlyInverted;
+    }
 
     public AbstractFade(long duration, float f) {
         this.duration = duration;

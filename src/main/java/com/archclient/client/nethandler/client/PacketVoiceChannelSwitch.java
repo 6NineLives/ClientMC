@@ -4,17 +4,24 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.server.IACNetHandlerServer;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketVoiceChannelSwitch extends Packet {
 
     private EaglercraftUUID switchingTo;
+
+    public PacketVoiceChannelSwitch(EaglercraftUUID switchingTo) {
+        this.switchingTo = switchingTo;
+    }
+
+    public PacketVoiceChannelSwitch() {
+    }
+
+    public EaglercraftUUID getSwitchingTo() {
+        return this.switchingTo;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

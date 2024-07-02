@@ -3,17 +3,29 @@ package com.archclient.client.nethandler.shared;
 import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketRemoveWaypoint extends Packet {
 
     private String name;
     private String world;
+
+    public PacketRemoveWaypoint(String name, String world) {
+        this.name = name;
+        this.world = world;
+    }
+
+    public PacketRemoveWaypoint() {
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getWorld() {
+        return this.world;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

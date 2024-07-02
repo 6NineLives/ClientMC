@@ -4,21 +4,38 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketTeammates extends Packet {
 
     private EaglercraftUUID leader;
     private long lastMs;
     private Map<EaglercraftUUID, Map<String, Double>> players;
+
+    public PacketTeammates(EaglercraftUUID leader, long lastMs, Map<EaglercraftUUID, Map<String, Double>> players) {
+        this.leader = leader;
+        this.lastMs = lastMs;
+        this.players = players;
+    }
+
+    public PacketTeammates() {
+    }
+
+    public EaglercraftUUID getLeader() {
+        return this.leader;
+    }
+
+    public long getLastMs() {
+        return this.lastMs;
+    }
+
+    public Map<EaglercraftUUID, Map<String, Double>> getPlayers() {
+        return this.players;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

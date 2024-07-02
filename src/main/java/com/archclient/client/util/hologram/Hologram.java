@@ -1,8 +1,6 @@
 package com.archclient.client.util.hologram;
 
 import com.archclient.bridge.ref.Ref;
-import lombok.Getter;
-import lombok.Setter;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 import net.lax1dude.eaglercraft.v1_8.opengl.GlStateManager;
 import net.lax1dude.eaglercraft.v1_8.opengl.WorldRenderer;
@@ -13,16 +11,41 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 public class Hologram {
     private final EaglercraftUUID uuid;
-    @Setter
     private String[] texts;
     private final double x;
     private final double y;
     private final double z;
-    @Getter
     private static final List<Hologram> holograms = new ArrayList<>();
+
+    public String[] getTexts() {
+        return this.texts;
+    }
+
+    public void setTexts(String[] texts) {
+        this.texts = texts;
+    }
+
+    public EaglercraftUUID getUuid() {
+        return this.uuid;
+    }
+
+    public double getX() {
+        return this.x;
+    }
+
+    public double getY() {
+        return this.y;
+    }
+
+    public double getZ() {
+        return this.z;
+    }
+
+    public static List<Hologram> getHolograms() {
+        return holograms;
+    }
 
     public Hologram(EaglercraftUUID uuid, double x, double y, double z) {
         this.uuid = uuid;

@@ -4,20 +4,32 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketUpdateHologram extends Packet {
 
     private EaglercraftUUID uuid;
     private List<String> lines;
+
+    public PacketUpdateHologram(EaglercraftUUID uuid, List<String> lines) {
+        this.uuid = uuid;
+        this.lines = lines;
+    }
+
+    public PacketUpdateHologram() {
+    }
+
+    public EaglercraftUUID getUuid() {
+        return this.uuid;
+    }
+
+    public List<String> getLines() {
+        return this.lines;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

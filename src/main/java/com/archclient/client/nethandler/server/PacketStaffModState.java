@@ -4,17 +4,29 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketStaffModState extends Packet {
 
     private String mod;
     private boolean state;
+
+    public PacketStaffModState(String mod, boolean state) {
+        this.mod = mod;
+        this.state = state;
+    }
+
+    public PacketStaffModState() {
+    }
+
+    public String getMod() {
+        return this.mod;
+    }
+
+    public boolean isState() {
+        return this.state;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

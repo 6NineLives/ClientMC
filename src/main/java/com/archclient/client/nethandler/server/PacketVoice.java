@@ -4,18 +4,30 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketVoice extends Packet {
 
     private EaglercraftUUID uuid;
     private byte[] data;
+
+    public PacketVoice(EaglercraftUUID uuid, byte[] data) {
+        this.uuid = uuid;
+        this.data = data;
+    }
+
+    public PacketVoice() {
+    }
+
+    public EaglercraftUUID getUuid() {
+        return this.uuid;
+    }
+
+    public byte[] getData() {
+        return this.data;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

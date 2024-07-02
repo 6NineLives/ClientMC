@@ -3,13 +3,9 @@ package com.archclient.client.nethandler.shared;
 import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketAddWaypoint extends Packet {
 
     private String name;
@@ -20,6 +16,45 @@ public class PacketAddWaypoint extends Packet {
     private int z;
     private boolean forced;
     private boolean visible;
+
+    public PacketAddWaypoint(String name, String world, int color, int x, int y, int z, boolean forced, boolean visible) {
+        this.name = name;
+        this.world = world;
+        this.color = color;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.forced = forced;
+        this.visible = visible;
+    }
+
+    public PacketAddWaypoint() {
+    }
+
+    public String getName() {
+        return this.name;
+    }
+    public String getWorld() {
+        return this.world;
+    }
+    public int getColor() {
+        return this.color;
+    }
+    public int getX() {
+        return this.x;
+    }
+    public int getY() {
+        return this.y;
+    }
+    public int getZ() {
+        return this.z;
+    }
+    public boolean isForced() {
+        return this.forced;
+    }
+    public boolean isVisible() {
+        return this.visible;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

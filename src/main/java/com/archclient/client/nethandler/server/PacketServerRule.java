@@ -5,11 +5,9 @@ import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
 import com.archclient.client.nethandler.obj.ServerRule;
-import lombok.Getter;
 
 import java.io.IOException;
 
-@Getter
 public class PacketServerRule extends Packet {
 
     private ServerRule rule;
@@ -17,6 +15,22 @@ public class PacketServerRule extends Packet {
     private float floatValue;
     private boolean enabled;
     private String stringValue;
+
+    public ServerRule getRule() {
+        return this.rule;
+    }
+    public int getIntValue() {
+        return this.intValue;
+    }
+    public float getFloatValue() {
+        return this.floatValue;
+    }
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+    public String getStringValue() {
+        return this.stringValue;
+    }
 
     public PacketServerRule() {
         this.stringValue = "";

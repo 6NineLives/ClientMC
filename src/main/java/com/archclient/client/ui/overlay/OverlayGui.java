@@ -13,8 +13,6 @@ import com.archclient.client.ui.util.RenderUtil;
 import com.archclient.client.ui.util.font.FontRegistry;
 import com.archclient.client.util.friend.Friend;
 import com.archclient.client.util.friend.Status;
-import lombok.Getter;
-import lombok.Setter;
 import net.lax1dude.eaglercraft.v1_8.Keyboard;
 import net.lax1dude.eaglercraft.v1_8.internal.KeyboardConstants;
 import net.minecraft.client.Minecraft;
@@ -28,12 +26,8 @@ import java.util.List;
 import java.util.Queue;
 
 public class OverlayGui extends AbstractGui {
-    @Getter
-    @Setter
     private static OverlayGui instance;
-    @Getter
     private final FriendsListElement friendsListElement;
-    @Getter
     private final FriendRequestListElement friendRequestsElement;
     private final FlatButtonElement friendsButton;
     private final FlatButtonElement requestsButton;
@@ -43,6 +37,21 @@ public class OverlayGui extends AbstractGui {
     private final Queue<Alert> alertQueue = new LinkedList<>();
     private final List<Alert> alertList = new ArrayList<>();
     private ACGuiScreen context;
+
+    public static OverlayGui getInstance() {
+        return instance;
+    }
+    public static void setInstance(OverlayGui instance) {
+        instance = instance;
+    }
+
+    public FriendsListElement getFriendsListElement() {
+        return this.friendsListElement;
+    }
+
+    public FriendRequestListElement getFriendRequestsElement() {
+        return this.friendRequestsElement;
+    }
 
     public OverlayGui() {
         List<FriendElement> arrayList = new ArrayList<>();

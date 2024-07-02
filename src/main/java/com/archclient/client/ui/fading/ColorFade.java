@@ -1,12 +1,14 @@
 package com.archclient.client.ui.fading;
 
-import lombok.Setter;
-
 public class ColorFade extends ExponentialFade {
-    @Setter
     private int startColor;
-    @Setter
+    public void setStartColor(int startColor) {
+        this.startColor = startColor;
+    }
     private int endColor;
+    public void setEndColor(int endColor) {
+        this.endColor = endColor;
+    }
     private boolean switched;
     private int awtStartColor;
     private int awtEndColor;

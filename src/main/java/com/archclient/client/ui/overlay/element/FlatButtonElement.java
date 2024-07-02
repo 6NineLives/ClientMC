@@ -3,13 +3,15 @@ package com.archclient.client.ui.overlay.element;
 import com.archclient.bridge.ref.Ref;
 import com.archclient.client.ui.mainmenu.AbstractElement;
 import com.archclient.client.ui.util.font.FontRegistry;
-import lombok.Getter;
-import lombok.Setter;
 
 public class FlatButtonElement extends AbstractElement {
-    @Getter
-    @Setter
     private String text;
+    public String getText() {
+        return this.text;
+    }
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public FlatButtonElement(String text) {
         this.text = text;

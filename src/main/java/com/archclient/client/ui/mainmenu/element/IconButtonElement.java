@@ -5,14 +5,17 @@ import com.archclient.client.ui.fading.ColorFade;
 import com.archclient.client.ui.mainmenu.AbstractElement;
 import com.archclient.client.ui.util.RenderUtil;
 import com.archclient.client.ui.util.font.FontRegistry;
-import lombok.Setter;
 import net.minecraft.util.ResourceLocation;
 
 public class IconButtonElement extends AbstractElement {
-    @Setter
     private ResourceLocation icon;
-    @Setter
+    public void setIcon(ResourceLocation icon) {
+        this.icon = icon;
+    }
     private String text;
+    public void setText(String text) {
+        this.text = text;
+    }
     private boolean usesText;
     private final ColorFade outlineFade;
     private final ColorFade upperBackgroundFade;

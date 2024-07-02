@@ -1,16 +1,26 @@
 package com.archclient.bridge.ext;
 
-import lombok.Getter;
-
 public class GLColor {
-    @Getter
     private float red;
-    @Getter
     private float green;
-    @Getter
     private float blue;
-    @Getter
     private float alpha;
+
+    public float getRed() {
+        return this.red;
+    }
+
+    public float getGreen() {
+        return this.green;
+    }
+
+    public float getBlue() {
+        return this.blue;
+    }
+
+    public float getAlpha() {
+        return this.alpha;
+    }
 
     public GLColor setValues(float red, float green, float blue, float alpha) {
         this.red = red;

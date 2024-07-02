@@ -4,16 +4,23 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.server.IACNetHandlerServer;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketClientVoice extends Packet {
 
     private byte[] data;
+
+    public PacketClientVoice(byte[] data) {
+        this.data = data;
+    }
+
+    public PacketClientVoice() {
+    }
+
+    public byte[] getData() {
+        return this.data;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

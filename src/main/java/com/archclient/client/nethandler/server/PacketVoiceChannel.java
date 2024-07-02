@@ -4,22 +4,41 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketVoiceChannel extends Packet {
 
     private EaglercraftUUID uuid;
     private String name;
     private Map<EaglercraftUUID, String> players;
     private Map<EaglercraftUUID, String> listening;
+
+    public PacketVoiceChannel(EaglercraftUUID uuid, String name, Map<EaglercraftUUID, String> players, Map<EaglercraftUUID, String> listening) {
+        this.uuid = uuid;
+        this.name = name;
+        this.players = players;
+        this.listening = listening;
+    }
+
+    public PacketVoiceChannel() {
+    }
+
+    public EaglercraftUUID getUuid() {
+        return this.uuid;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public Map<EaglercraftUUID, String> getPlayers() {
+        return this.players;
+    }
+    public Map<EaglercraftUUID, String> getListening() {
+        return this.listening;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

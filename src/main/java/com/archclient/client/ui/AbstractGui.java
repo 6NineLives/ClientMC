@@ -4,7 +4,6 @@ import com.archclient.bridge.ref.Ref;
 import com.archclient.bridge.wrapper.ACGuiScreen;
 import com.archclient.main.ArchClient;
 import com.archclient.client.ui.mainmenu.AbstractElement;
-import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 
@@ -14,15 +13,23 @@ import java.util.Iterator;
 import java.util.List;
 
 public abstract class AbstractGui extends ACGuiScreen {
-    @Getter
     protected ScaledResolution resolution;
-    @Getter
     protected float scaledWidth;
-    @Getter
     protected float scaledHeight;
-    @Getter
     protected List<AbstractElement> elements;
     protected int elementListSize = 0;
+    public ScaledResolution getResolution() {
+        return this.resolution;
+    }
+    public float getScaledWidth() {
+        return this.scaledWidth;
+    }
+    public float getScaledHeight() {
+        return this.scaledHeight;
+    }
+    public List<AbstractElement> getElements() {
+        return this.elements;
+    }
 
     @Override
     public void setWorldAndResolution(final Minecraft mc, final int displayWidth, final int displayHeight) {

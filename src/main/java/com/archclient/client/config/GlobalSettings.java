@@ -3,7 +3,6 @@ package com.archclient.client.config;
 import com.archclient.client.config.types.PinnedServer;
 import com.archclient.client.config.types.UnrecommendedServer;
 import com.archclient.client.ui.element.type.ColorPickerColorElement;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class GlobalSettings {
     public Setting clearGlass;
     public Setting redString;
     public Setting transparentBackground;
-    @Getter private Setting crosshairSettingsLabel;
+    private Setting crosshairSettingsLabel;
     public Setting customCrosshair;
     public Setting crosshairOutline;
     public Setting crosshairColor;
@@ -69,6 +68,9 @@ public class GlobalSettings {
     // Nox: apparently, ArchClient code, Decencies.
     public List<ColorPickerColorElement> favouriteColors = new ArrayList<>();
     public List<ColorPickerColorElement> IlIIlIIlIllIIIIllIIllIlIl = new ArrayList<>();
+    public Setting getCrosshairSettingsLabel() {
+        return this.crosshairSettingsLabel;
+    }
 
 //    public boolean lIIIIlIIllIIlIIlIIIlIIllI() {
 //        return (Boolean)this.IlIIlIIIIlIIIIllllIIlIllI.getValue() == false || (Boolean)this.lIllIllIlIIllIllIlIlIIlIl.getValue() != false;

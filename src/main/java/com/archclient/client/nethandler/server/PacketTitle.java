@@ -4,13 +4,9 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketTitle extends Packet {
 
     private String type;
@@ -22,6 +18,41 @@ public class PacketTitle extends Packet {
 
     public PacketTitle(String type, String message, long displayTimeMs, long fadeInTimeMs, long fadeOutTimeMs) {
         this(type, message, 1.0f, displayTimeMs, fadeInTimeMs, fadeOutTimeMs);
+    }
+
+    public PacketTitle(String type, String message, float scale, long displayTimeMs, long fadeInTimeMs, long fadeOutTimeMs) {
+        this.type = type;
+        this.message = message;
+        this.scale = scale;
+        this.displayTimeMs = displayTimeMs;
+        this.fadeInTimeMs = fadeInTimeMs;
+        this.fadeOutTimeMs = fadeOutTimeMs;
+    }
+
+    public PacketTitle() {
+    }
+
+    public String getType() {
+        return this.type;
+    }
+    public String getMessage() {
+        return this.message;
+    }
+
+    public float getScale() {
+        return this.scale;
+    }
+
+    public long getDisplayTimeMs() {
+        return this.displayTimeMs;
+    }
+
+    public long getFadeInTimeMs() {
+        return this.fadeInTimeMs;
+    }
+
+    public long getFadeOutTimeMs() {
+        return this.fadeOutTimeMs;
     }
 
     @Override

@@ -5,30 +5,66 @@ import com.archclient.bridge.ref.implementations.Implementations;
 import com.archclient.impl.ref.DrawingUtils;
 import com.archclient.impl.ref.InstanceCreator;
 import com.archclient.main.identification.MinecraftVersion;
-import lombok.Getter;
-import lombok.Setter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 
 public class Ref {
     // These fields can be set from the version specific mod and be used equally throughout all versions without having to change much.
-    @Getter @Setter
     private static MinecraftVersion minecraftVersion = null;
-    @Getter @Setter
     private static GLBridge glBridge = null;
-    @Getter @Setter
     private static DrawingUtils drawingUtils = null;
-    @Getter @Setter
     private static Minecraft minecraft = null;
-    @Getter @Setter
     private static RenderManager renderManager = null;
-    @Getter @Setter
     private static Tessellator tessellator = null;
-    @Getter @Setter
     private static InstanceCreator instanceCreator;
-    @Getter
     private static final Implementations implementations = new Implementations();
+
+    public static MinecraftVersion getMinecraftVersion() {
+        return minecraftVersion;
+    }
+    public static void setMinecraftVersion(MinecraftVersion minecraftVersion) {
+        minecraftVersion = minecraftVersion;
+    }
+    public static GLBridge getGlBridge() {
+        return glBridge;
+    }
+    public static void setGlBridge(GLBridge glBridge) {
+        glBridge = glBridge;
+    }
+    public static DrawingUtils getDrawingUtils() {
+        return drawingUtils;
+    }
+    public static void setDrawingUtils(DrawingUtils drawingUtils) {
+        drawingUtils = drawingUtils;
+    }
+    public static Minecraft getMinecraft() {
+        return minecraft;
+    }
+    public static void setMinecraft(Minecraft minecraft) {
+        minecraft = minecraft;
+    }
+    public static RenderManager getRenderManager() {
+        return renderManager;
+    }
+    public static void setRenderManager(RenderManager renderManager) {
+        renderManager = renderManager;
+    }
+    public static Tessellator getTessellator() {
+        return tessellator;
+    }
+    public static void setTessellator(Tessellator tessellator) {
+        tessellator = tessellator;
+    }
+    public static InstanceCreator getInstanceCreator() {
+        return instanceCreator;
+    }
+    public static void setInstanceCreator(InstanceCreator instanceCreator) {
+        instanceCreator = instanceCreator;
+    }
+    public static Implementations getImplementations() {
+        return implementations;
+    }
 
     public static void modified$drawRect(float left, float top, float right, float bottom, int color) {
         getDrawingUtils().drawRect(left, top, right, bottom, color);

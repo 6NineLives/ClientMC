@@ -4,16 +4,23 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketUpdateWorld extends Packet {
 
     private String world;
+
+    public PacketUpdateWorld(String world) {
+        this.world = world;
+    }
+
+    public PacketUpdateWorld() {
+    }
+
+    public String getWorld() {
+        return this.world;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {

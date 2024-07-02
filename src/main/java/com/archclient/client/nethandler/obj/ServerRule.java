@@ -1,8 +1,5 @@
 package com.archclient.client.nethandler.obj;
 
-import lombok.Getter;
-
-@Getter
 public enum ServerRule {
 
     VOICE_ENABLED("voiceEnabled", Boolean.class),
@@ -12,6 +9,12 @@ public enum ServerRule {
 
     private final String ruleName;
     private final Class value;
+    public String getRuleName() {
+        return this.ruleName;
+    }
+    public Class getValue() {
+        return this.value;
+    }
 
     public static ServerRule getRuleName(String name) {
         ServerRule rule = null;

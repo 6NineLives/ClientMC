@@ -3,16 +3,20 @@ package com.archclient.client.ui.mainmenu;
 import com.archclient.client.ui.fading.ColorFade;
 import com.archclient.client.ui.util.RenderUtil;
 import com.archclient.client.ui.util.font.FontRegistry;
-import lombok.Getter;
-import lombok.Setter;
 
 public class GradientTextButton extends AbstractElement {
-    @Getter @Setter
     private String text;
     private final ColorFade outlineFade;
     private final ColorFade upperBackgroundFade;
     private final ColorFade lowerBackgroundFade;
     private int[] colors;
+
+    public String getText() {
+        return this.text;
+    }
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public GradientTextButton(String string) {
         this.text = string;

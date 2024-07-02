@@ -8,7 +8,6 @@ import com.archclient.client.nethandler.shared.PacketAddWaypoint;
 import com.archclient.client.nethandler.shared.PacketRemoveWaypoint;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import lombok.Getter;
 import net.lax1dude.eaglercraft.v1_8.netty.Unpooled;
 
 import java.io.IOException;
@@ -17,7 +16,10 @@ public abstract class Packet {
 
     private static final BiMap<Class<? extends Packet>, Integer> REGISTRY = HashBiMap.create();
 
-    @Getter private Object attachment;
+    private Object attachment;
+    public Object getAttachment() {
+        return this.attachment;
+    }
 
     public abstract void write(ByteBufWrapper buf) throws IOException;
 

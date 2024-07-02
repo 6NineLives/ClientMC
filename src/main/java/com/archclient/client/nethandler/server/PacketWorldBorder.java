@@ -4,13 +4,9 @@ import com.archclient.client.nethandler.ByteBufWrapper;
 import com.archclient.client.nethandler.IACNetHandler;
 import com.archclient.client.nethandler.Packet;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor @NoArgsConstructor @Getter
 public class PacketWorldBorder extends Packet {
 
     private String id;
@@ -22,6 +18,49 @@ public class PacketWorldBorder extends Packet {
     private double minZ;
     private double maxX;
     private double maxZ;
+
+    public PacketWorldBorder(String id, String world, boolean cancelsExit, boolean canShrinkExpand, int color, double minX, double minZ, double maxX, double maxZ) {
+        this.id = id;
+        this.world = world;
+        this.cancelsExit = cancelsExit;
+        this.canShrinkExpand = canShrinkExpand;
+        this.color = color;
+        this.minX = minX;
+        this.minZ = minZ;
+        this.maxX = maxX;
+        this.maxZ = maxZ;
+    }
+
+    public PacketWorldBorder() {
+    }
+
+    public String getId() {
+        return this.id;
+    }
+    public String getWorld() {
+        return this.world;
+    }
+    public boolean isCancelsExit() {
+        return this.cancelsExit;
+    }
+    public boolean isCanShrinkExpand() {
+        return this.canShrinkExpand;
+    }
+    public int getColor() {
+        return this.color;
+    }
+    public double getMinX() {
+        return this.minX;
+    }
+    public double getMinZ() {
+        return this.minZ;
+    }
+    public double getMaxX() {
+        return this.maxX;
+    }
+    public double getMaxZ() {
+        return this.maxZ;
+    }
 
     @Override
     public void write(ByteBufWrapper buf) throws IOException {
