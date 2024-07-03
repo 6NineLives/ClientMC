@@ -42,7 +42,7 @@ public class OverlayGui extends AbstractGui {
         return instance;
     }
     public static void setInstance(OverlayGui instance) {
-        instance = instance;
+        OverlayGui.instance = instance;
     }
 
     public FriendsListElement getFriendsListElement() {

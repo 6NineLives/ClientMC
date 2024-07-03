@@ -442,7 +442,7 @@ public class AssetsWebSocket {
             //xxxbyte[] data = AssetsWebSocket.getKeyResponse(packet.getPublicKey(), test);
             //this.sendToServer(new WSPacketClientKeyResponse(data));
         }
-        catch (Exception | UnsatisfiedLinkError throwable) {
+        catch (Exception exc) {
             // empty catch block
         }
     }

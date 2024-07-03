@@ -24,43 +24,43 @@ public class Ref {
         return minecraftVersion;
     }
     public static void setMinecraftVersion(MinecraftVersion minecraftVersion) {
-        minecraftVersion = minecraftVersion;
+        Ref.minecraftVersion = minecraftVersion;
     }
     public static GLBridge getGlBridge() {
         return glBridge;
     }
     public static void setGlBridge(GLBridge glBridge) {
-        glBridge = glBridge;
+        Ref.glBridge = glBridge;
     }
     public static DrawingUtils getDrawingUtils() {
         return drawingUtils;
     }
     public static void setDrawingUtils(DrawingUtils drawingUtils) {
-        drawingUtils = drawingUtils;
+        Ref.drawingUtils = drawingUtils;
     }
     public static Minecraft getMinecraft() {
         return minecraft;
     }
     public static void setMinecraft(Minecraft minecraft) {
-        minecraft = minecraft;
+        Ref.minecraft = minecraft;
     }
     public static RenderManager getRenderManager() {
         return renderManager;
     }
     public static void setRenderManager(RenderManager renderManager) {
-        renderManager = renderManager;
+        Ref.renderManager = renderManager;
     }
     public static Tessellator getTessellator() {
         return tessellator;
     }
     public static void setTessellator(Tessellator tessellator) {
-        tessellator = tessellator;
+        Ref.tessellator = tessellator;
     }
     public static InstanceCreator getInstanceCreator() {
         return instanceCreator;
     }
     public static void setInstanceCreator(InstanceCreator instanceCreator) {
-        instanceCreator = instanceCreator;
+        Ref.instanceCreator = instanceCreator;
     }
     public static Implementations getImplementations() {
         return implementations;

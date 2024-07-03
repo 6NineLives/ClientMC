@@ -97,7 +97,7 @@ public class GlobalSettings {
             try {
                 float var1 = (float)20000 / (float)(20000 - Math.max(0, Math.min(19500, (int) var0 * 195)));
                 //Message.m(var1);
-            } catch (UnsatisfiedLinkError var2) {
+            } catch (Exception var2) {
                 System.err.println("[AC] ACAgent.dll is not attached.");
             }
         }).setValue(85).setMinMax(0, 100);

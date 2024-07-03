@@ -7,6 +7,11 @@ bin
 minecraft 1.8 source
 /com
 /resources
+javascript/assets.epk
+javascript/classes.js
+javascript/classes.js.map
+javascript/EaglercraftX_1.8_Offline_en_US.html
+javascript/EaglercraftX_1.8_Offline_International.html
 proxyServer/bin
 proxyServer/rundir
 desktopRuntime/_eagstorage*

@@ -210,12 +210,12 @@ public class ArchClient
             (this.configManager = new ConfigManager()).read();
             this.acInfo("Created Configuration Manager", ConfigManager.class);
 
-            this.acInfo("Connecting to websocket server...");
-            this.connectToAssetsServer();
             this.friendsManager = new FriendsManager();
             this.acInfo("Created Friends Manager", FriendsManager.class);
             OverlayGui.setInstance(new OverlayGui());
             this.acInfo("Created Overlay UI", OverlayGui.class);
+            this.acInfo("Connecting to websocket server...");
+            this.connectToAssetsServer();
 
             this.eventBus.addEvent(PluginMessageEvent.class, this.netHandler::onPluginMessage);
             this.eventBus.addEvent(KeyboardEvent.class, (e) -> {

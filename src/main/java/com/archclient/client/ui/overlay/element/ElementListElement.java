@@ -3,10 +3,10 @@ package com.archclient.client.ui.overlay.element;
 import com.archclient.client.ui.mainmenu.AbstractElement;
 
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
 
 public class ElementListElement<T extends AbstractElement> extends AbstractElement {
-    protected final List<T> elements = new CopyOnWriteArrayList<>();
+    protected final List<T> elements = new ArrayList<>();
 
     public ElementListElement(List<T> list) {
         this.elements.addAll(list);
