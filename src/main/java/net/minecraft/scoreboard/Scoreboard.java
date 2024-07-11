@@ -3,9 +3,11 @@ package net.minecraft.scoreboard;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import com.archclient.main.ArchClient;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -300,22 +302,6 @@ public class Scoreboard {
 	}
 
 	/**+
-	 * Removes the given username from the given ScorePlayerTeam. If
-	 * the player is not on the team then an IllegalStateException
-	 * is thrown.
-	 */
-	public void removePlayerFromTeam(String parString1, ScorePlayerTeam parScorePlayerTeam) {
-		if (this.getPlayersTeam(parString1) != parScorePlayerTeam) {
-			throw new IllegalStateException(
-					"Player is either on another team or not on any team. Cannot remove from team \'"
-							+ parScorePlayerTeam.getRegisteredName() + "\'.");
-		} else {
-			this.teamMemberships.remove(parString1);
-			parScorePlayerTeam.getMembershipCollection().remove(parString1);
-		}
-	}
-
-	/**+
 	 * Retrieve all registered ScorePlayerTeam names
 	 */
 	public Collection<String> getTeamNames() {
@@ -440,4 +426,44 @@ public class Scoreboard {
 			this.removePlayerFromTeams(s);
 		}
 	}
+    public void func_96529_a(String name, ScoreObjective objective) {
+        this.getValueFromObjective(name, (ScoreObjective) objective);
+    }
+
+    public ScorePlayerTeam bridge$getPlayersTeam(String name) {
+        return (ScorePlayerTeam) this.getPlayersTeam(name);
+    }
+
+    private static final Comparator<Score> patchedScoreComparator = (first, second) -> first.getScorePoints() > second.getScorePoints() ? 1 : (first.getScorePoints() < second.getScorePoints() ? -1 : second.getPlayerName().compareToIgnoreCase(first.getPlayerName()));
+    public Collection<Score> func_96534_i(ScoreObjective objective) {
+        List<Score> list = Lists.newArrayList();
+
+        for (Map<ScoreObjective, Score> map : this.entitiesScoreObjectives.values()) {
+            Score score = map.get(objective);
+
+            if (score != null) {
+                list.add((Score) score);
+            }
+        }
+
+        Collections.sort(list, patchedScoreComparator);
+        return list;
+    }
+
+    public ScoreObjective func_96539_a(int i) {
+        return (ScoreObjective) this.getObjectiveInDisplaySlot(i);
+    }
+
+    /**
+     * @author iAmSpace
+     * @reason crash
+     */
+    public void removePlayerFromTeam(String playerName, ScorePlayerTeam team) {
+        if (this.getPlayersTeam(playerName) != team) {
+            ArchClient.getInstance().acInfo("Couldn't remove " + team.getRegisteredName() + " from team.");
+        } else {
+            this.teamMemberships.remove(playerName);
+            team.getMembershipCollection().remove(playerName);
+        }
+    }
 }

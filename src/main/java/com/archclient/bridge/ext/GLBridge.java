@@ -1,7 +1,7 @@
 package com.archclient.bridge.ext;
 
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
+import net.lax1dude.eaglercraft.v1_8.internal.buffer.FloatBuffer;
+import net.lax1dude.eaglercraft.v1_8.internal.buffer.IntBuffer;
 
 public interface GLBridge {
     void bridge$enableBlend();
@@ -36,6 +36,7 @@ public interface GLBridge {
     void bridge$scissor(int x, int y, int width, int height);
     void bridge$enableScissoring();
     void bridge$disableScissoring();
+    void bridge$rotate(float angle, float x, float y, float z);
     void bridge$bindTexture(int id);
     void bridge$disableDepthTest();
     void bridge$depthMask(boolean b);

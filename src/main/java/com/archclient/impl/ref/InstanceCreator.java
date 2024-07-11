@@ -8,9 +8,17 @@ import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C17PacketCustomPayload;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.scoreboard.IScoreObjectiveCriteria;
+import net.minecraft.scoreboard.ScoreObjective;
+import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.*;
 
 public class InstanceCreator {
@@ -37,6 +45,18 @@ public class InstanceCreator {
         return (ISound) PositionedSoundRecord.create((ResourceLocation) location, pitch);
     }
 
+    public Vec3 createVec3(double x, double y, double z) {
+        return (Vec3) new Vec3(x, y, z);
+    }
+
+    public ItemStack createItemStack(Item item) {
+        return new ItemStack((Item) item);
+    }
+
+    public RenderItem createRenderItem() {
+        return (RenderItem) Minecraft.getMinecraft().getRenderItem();
+    }
+
     public ChatComponentText createChatComponentText(String initialString) {
         return (ChatComponentText) new ChatComponentText(initialString);
     }
@@ -59,5 +79,34 @@ public class InstanceCreator {
 
     public C17PacketCustomPayload createC17PacketCustomPayload(String channel, PacketBuffer data) {
         return (C17PacketCustomPayload) new C17PacketCustomPayload(channel, (PacketBuffer) data);
+    }
+
+    public PotionEffect createPotionEffect(String idName, int duration, int multiplier) {
+        int id = -1337;
+
+        switch (idName) {
+            case "FIRE_RESISTANCE":
+                id = Potion.fireResistance.getId();
+                break;
+            case "MOVE_SPEED":
+                id = Potion.moveSpeed.getId();
+                break;
+        }
+
+        return (PotionEffect) new PotionEffect(id, duration, multiplier);
+    }
+
+    public Scoreboard createScoreboard() {
+        return (Scoreboard) new Scoreboard();
+    }
+
+    public ScoreObjective createScoreObjective(Scoreboard scoreboard, String name, String type) {
+        IScoreObjectiveCriteria criteria = type.equalsIgnoreCase("dummy") ? IScoreObjectiveCriteria.DUMMY : IScoreObjectiveCriteria.TRIGGER;
+        return (ScoreObjective) new ScoreObjective((Scoreboard) scoreboard, name, criteria);
+    }
+
+    public ScoreObjective createScoreObjective(String name, String type) {
+        IScoreObjectiveCriteria criteria = type.equalsIgnoreCase("dummy") ? IScoreObjectiveCriteria.DUMMY : IScoreObjectiveCriteria.TRIGGER;
+        return (ScoreObjective) new ScoreObjective(new Scoreboard(), name, criteria);
     }
 }

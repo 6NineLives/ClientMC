@@ -2412,4 +2412,8 @@ public class Minecraft implements IThreadListener {
         }
         return ret;
     }
+
+    public Timer getTimer() {
+        return this.timer;
+    }
 }

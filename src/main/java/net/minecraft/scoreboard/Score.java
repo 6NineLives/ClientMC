@@ -114,4 +114,9 @@ public class Score {
 	public void func_96651_a(List<EntityPlayer> parList) {
 		this.setScorePoints(this.theScoreObjective.getCriteria().func_96635_a(parList));
 	}
+
+    public String getFormattedName(Scoreboard scoreboardBridge) {
+        Scoreboard scoreboard = (Scoreboard) scoreboardBridge;
+        return scoreboard.getPlayersTeam(this.getPlayerName()) == null ? this.getPlayerName() : ScorePlayerTeam.formatPlayerName(scoreboard.getPlayersTeam(this.getPlayerName()), this.getPlayerName());
+    }
 }

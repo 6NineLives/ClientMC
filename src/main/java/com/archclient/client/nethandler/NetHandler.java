@@ -178,7 +178,7 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
         EaglercraftUUID uUID = packet.getLeader();
         long l = packet.getLastMs();
         /*xxx
-        if (!ArchClient.getInstance().getGlobalSettings().enableTeamView.<Boolean>value() || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().bridge$getThePlayer().bridge$getUniqueID())) {
+        if (!ArchClient.getInstance().getGlobalSettings().enableTeamView.<Boolean>value() || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().thePlayer.bridge$getUniqueID())) {
             ArchClient.getInstance().getModuleManager().teammatesModule.getTeammates().clear();
             System.out.println("[AC Teammates] Cleared Map..");
             return;

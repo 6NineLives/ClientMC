@@ -6,6 +6,9 @@ import net.lax1dude.eaglercraft.v1_8.opengl.WorldRenderer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public final class HudUtil {
 
@@ -26,18 +29,17 @@ public final class HudUtil {
      * Renders the item's overlay information. Examples being stack count or damage on top of the item's image at the
      * specified position.
      */
-    /*XXX
-    public static void renderItemOverlayIntoGUI(FontRenderer fontRenderer, ItemStackBridge itemStack, int x, int y, boolean showDamageBar, boolean showCount) {
+    public static void renderItemOverlayIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, boolean showDamageBar, boolean showCount) {
         if (itemStack != null && (showDamageBar || showCount)) {
-            if (itemStack.bridge$isItemDamaged() && showDamageBar) {
+            if (itemStack.isItemDamaged() && showDamageBar) {
                 int var11 = (int) Math
-                        .round(13.0D - itemStack.bridge$getItemDamageForDisplay() * 13.0D / itemStack.bridge$getMaxDamage());
+                        .round(13.0D - itemStack.getItemDamage() * 13.0D / itemStack.getMaxDamage());
                 int var7 = (int) Math
-                        .round(255.0D - itemStack.bridge$getItemDamageForDisplay() * 255.0D / itemStack.bridge$getMaxDamage());
+                        .round(255.0D - itemStack.getItemDamage() * 255.0D / itemStack.getMaxDamage());
                 Ref.getGlBridge().bridge$disableLighting();
                 Ref.getGlBridge().bridge$disableDepthTest();
                 Ref.getGlBridge().bridge$disableTexture2D();
-                WorldRenderer tessellator = Ref.getTessellator().getWorldRenderer();
+                Tessellator tessellator = Ref.getTessellator();
                 int var9 = 255 - var7 << 16 | var7 << 8;
                 int var10 = (255 - var7) / 4 << 16 | 16128;
                 renderQuad(tessellator, x + 2, y + 13, 13, 2, 0);
@@ -52,10 +54,10 @@ public final class HudUtil {
             if (showCount) {
                 int count = 0;
 
-                if (itemStack.bridge$getMaxStackSize() > 1) {
-                    count = HudUtil.countInInventory(Ref.getMinecraft().thePlayer, itemStack.bridge$getItem(),
-                            itemStack.bridge$getItemDamage());
-                } else if (itemStack.bridge$getItem().equals(Ref.getUtils().getItemFromName("bow"))) {
+                if (itemStack.getMaxStackSize() > 1) {
+                    count = HudUtil.countInInventory(Ref.getMinecraft().thePlayer, itemStack.getItem(),
+                            itemStack.getItemDamage());
+                } else if (itemStack.getItem().equals(Ref.getUtils().getItemFromName("bow"))) {
                     count = HudUtil.countInInventory(Ref.getMinecraft().thePlayer, Ref.getUtils().getItemFromName("arrow"));
                 }
 
@@ -71,7 +73,6 @@ public final class HudUtil {
             }
         }
     }
-    */
 
     /**
      * Adds a quad to the tesselator at the specified position with the set width and height and color. Args:
@@ -88,21 +89,18 @@ public final class HudUtil {
         tessellator.draw();
     }
 
-    /*XXX
-    public static int countInInventory(EntityPlayerBridge player, ItemBridge item) {
+    public static int countInInventory(EntityPlayer player, Item item) {
         return countInInventory(player, item, -1);
     }
 
-    public static int countInInventory(EntityPlayerBridge player, ItemBridge item, int md) {
+    public static int countInInventory(EntityPlayer player, Item item, int md) {
         int count = 0;
-        for (int i = 0; i < player.bridge$getInventory().bridge$getMainInventory().length; i++) {
-            if (player.bridge$getInventory().bridge$getMainInventory()[i] != null && item.equals(player.bridge$getInventory().bridge$getMainInventory()[i].bridge$getItem()) &&
-                    (md == -1 || player.bridge$getInventory().bridge$getMainInventory()[i].bridge$getItemDamage() == md)) {
-                count += player.bridge$getInventory().bridge$getMainInventory()[i].bridge$getStackSize();
+        for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+            if (player.inventory.mainInventory[i] != null && item.equals(player.inventory.mainInventory[i].getItem()) &&
+                    (md == -1 || player.inventory.mainInventory[i].getItemDamage() == md)) {
+                count += player.inventory.mainInventory[i].stackSize;
             }
         }
         return count;
     }
-    */
-
 }

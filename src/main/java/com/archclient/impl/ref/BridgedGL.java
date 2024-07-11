@@ -2,13 +2,12 @@ package com.archclient.impl.ref;
 
 import com.archclient.bridge.ext.GLBridge;
 
+import net.lax1dude.eaglercraft.v1_8.internal.buffer.FloatBuffer;
+import net.lax1dude.eaglercraft.v1_8.internal.buffer.IntBuffer;
 import net.lax1dude.eaglercraft.v1_8.opengl.EaglercraftGPU;
 import net.lax1dude.eaglercraft.v1_8.opengl.GlStateManager;
 
 import static net.lax1dude.eaglercraft.v1_8.internal.PlatformOpenGL.*;
-
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
 public class BridgedGL implements GLBridge {
     public void bridge$enableBlend() {
@@ -137,6 +136,10 @@ public class BridgedGL implements GLBridge {
 
     public void bridge$disableScissoring() {
         _wglDisable(0xC11);
+    }
+
+    public void bridge$rotate(float angle, float x, float y, float z) {
+        GlStateManager.rotate(angle, x, y, z);
     }
 
     public void bridge$bindTexture(int id) {

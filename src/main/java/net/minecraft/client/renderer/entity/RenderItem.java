@@ -1096,4 +1096,12 @@ public class RenderItem implements IResourceManagerReloadListener {
 	public void onResourceManagerReload(IResourceManager var1) {
 		this.itemModelMesher.rebuildCache();
 	}
+
+    public float getZLevel() {
+        return this.zLevel;
+    }
+
+    public void setZLevel(float zLevel) {
+        this.zLevel = zLevel;
+    }
 }
