@@ -59,7 +59,7 @@ public class Setting {
         return this.maximumValue;
     }
 
-    private Object getValue() {
+    public Object getValue() {
         return this.value;
     }
 

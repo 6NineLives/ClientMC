@@ -71,11 +71,11 @@ public class ToggleElement
             this.displayString = this.setting.<Boolean>value() ? "ON" : "OFF";
             Ref.getMinecraft().getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.setting.setValue(!this.setting.<Boolean>value());
-            //xxxif (this.setting == ArchClient.getInstance().moduleManager.keyStrokes.replaceNamesWithArrows) {
-            //    ArchClient.getInstance().moduleManager.keyStrokes.initialize();
-            //} else if (this.setting == ArchClient.getInstance().globalSettings.enableTeamView && !ArchClient.getInstance().globalSettings.enableTeamView.<Boolean>value()) {
-            //    ArchClient.getInstance().globalSettings.enableTeamView.setValue(false);
-            //}
+            if (this.setting == ArchClient.getInstance().moduleManager.keyStrokes.replaceNamesWithArrows) {
+                ArchClient.getInstance().moduleManager.keyStrokes.initialize();
+            } else if (this.setting == ArchClient.getInstance().globalSettings.enableTeamView && !ArchClient.getInstance().globalSettings.enableTeamView.<Boolean>value()) {
+                ArchClient.getInstance().globalSettings.enableTeamView.setValue(false);
+            }
         }
     }
 }

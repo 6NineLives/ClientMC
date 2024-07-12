@@ -64,16 +64,6 @@ public class MainMenuBase extends AbstractGui {
         this.modMenuButton = new IconButtonElement(8,
                 Ref.getInstanceCreator().createResourceLocation("client/external/modmenu-logo.png"));
 
-        /*xxx
-        if (ReplayModCompatibility.isReplayModPresent()) {
-            this.bottomButtons.add(this.replayViewerButton);
-        }
-
-        if (ModMenuCompatibility.isModMenuPresent()) {
-            this.bottomButtons.add(this.modMenuButton);
-        }
-        */
-
         this.acTextShadowFade = new ColorFade(0xF000000, -16777216);
         this.exitButton = new IconButtonElement(Ref.getInstanceCreator().createResourceLocation("client/icons/delete-64.png"));
         this.accountButtonWidth = FontRegistry.getRobotoRegular13px().getStringWidth(Ref.getMinecraft().getSession().getProfile().getName());
@@ -266,22 +256,6 @@ public class MainMenuBase extends AbstractGui {
                         .createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"),
                                 1.0f));
                 this.mc.bridge$displayGuiScreen(new GuiCosmetics());
-            /*xxx
-            } else if (this.replayViewerButton.isMouseInside(mouseX, mouseY)) {
-                if (ReplayModCompatibility.isReplayModPresent()) {
-                    this.mc.getSoundHandler().playSound(Ref.getInstanceCreator()
-                            .createSoundFromPSR(Ref.getInstanceCreator()
-                                    .createResourceLocation("gui.button.press"), 1.0f));
-                    ReplayModCompatibility.openReplayViewer();
-                }
-            } else if (this.modMenuButton.isMouseInside(mouseX, mouseY)) {
-                if (ModMenuCompatibility.isModMenuPresent()) {
-                    this.mc.getSoundHandler().playSound(Ref.getInstanceCreator()
-                            .createSoundFromPSR(Ref.getInstanceCreator()
-                                    .createResourceLocation("gui.button.press"), 1.0f));
-                    ModMenuCompatibility.openModListScreen();
-                }
-            */
             } else {
                 boolean bl = mouseX < this.optionsButton.getX() && mouseY < (float) 30;
                 if (bl && !(this.mc.bridge$getCurrentScreen() instanceof MainMenu)) {

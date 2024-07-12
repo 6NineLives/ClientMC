@@ -8,6 +8,7 @@ import com.archclient.client.module.type.cooldowns.CooldownsModule;
 import com.archclient.client.module.type.keystrokes.KeystrokesModule;
 import com.archclient.client.module.type.notifications.ACNotificationsModule;
 import com.archclient.client.module.type.togglesprint.ToggleSprintModule;
+import com.archclient.client.util.voicechat.VoiceChat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ModuleManager {
     public FPSModule fpsModule;
     public CPSModule cpsModule;
     public CoordinatesModule coordinatesModule;
-    //xxxpublic VoiceChat voiceChat;
+    public VoiceChat voiceChat;
     public TeammatesModule teammatesModule;
 
     public ModuleManager() {
@@ -50,7 +51,7 @@ public class ModuleManager {
         this.modules.add(this.bossBar = new BossBarModule());
         this.modules.add(this.cpsModule = new CPSModule());
         this.modules.add(this.fpsModule = new FPSModule());
-        //xxxthis.voiceChat = new VoiceChat();
+        this.voiceChat = new VoiceChat();
         this.teammatesModule = new TeammatesModule();
         this.teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI(true);
 

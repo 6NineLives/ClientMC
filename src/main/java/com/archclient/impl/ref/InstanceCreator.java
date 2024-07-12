@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -43,6 +44,10 @@ public class InstanceCreator {
 
     public ISound createSoundFromPSR(ResourceLocation location, float pitch) {
         return (ISound) PositionedSoundRecord.create((ResourceLocation) location, pitch);
+    }
+
+    public KeyBinding createKeyBinding(String description, int keyCode, String category) {
+        return (KeyBinding) new KeyBinding(description, keyCode, category);
     }
 
     public Vec3 createVec3(double x, double y, double z) {

@@ -16,8 +16,8 @@ public class ModulePreviewContainer
     public ModulePreviewContainer(float f, int n, int n2, int n3, int n4) {
         super(f, n, n2, n3, n4);
         for (AbstractModule module : ArchClient.getInstance().moduleManager.modules) {
-            //if (module == ArchClient.getInstance().moduleManager.notifications)XXX
-            //    continue;
+            if (module == ArchClient.getInstance().moduleManager.notifications)
+                continue;
             ModulePreviewElement element = new ModulePreviewElement(this, module, f);
             this.elements.add(element);
         }

@@ -47,15 +47,15 @@ public class BridgedGL implements GLBridge {
     }
 
     public boolean bridge$isFramebufferEnabled() {
-        return false;//OpenGlHelper.isFramebufferEnabled();
+        return false;//xxxOpenGlHelper.isFramebufferEnabled();
     }
 
     public boolean bridge$isShadersSupported() {
-        return false;//OpenGlHelper.shadersSupported;
+        return false;//xxxOpenGlHelper.shadersSupported;
     }
 
     public void bridge$gluProject(float objX, float objY, float objZ, FloatBuffer modelMatrix, FloatBuffer projMatrix, IntBuffer viewport, FloatBuffer win_pos) {
-        //GLU.gluProject(objX, objY, objZ, modelMatrix, projMatrix, viewport, win_pos); XXX
+        //xxxGLU.gluProject(objX, objY, objZ, modelMatrix, projMatrix, viewport, win_pos);
     }
 
     public void bridge$blendFunc(int i, int i1) {
@@ -103,7 +103,7 @@ public class BridgedGL implements GLBridge {
     }
 
     public void bridge$flush() {
-        //_wglFlush();
+        //xxx_wglFlush();
     }
 
     public void bridge$alphaFunc(int func, float ref) {

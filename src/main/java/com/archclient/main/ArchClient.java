@@ -5,10 +5,14 @@ import net.lax1dude.eaglercraft.v1_8.internal.KeyboardConstants;
 import net.lax1dude.eaglercraft.v1_8.internal.vfs2.VFile2;
 import net.lax1dude.eaglercraft.v1_8.log4j.LogManager;
 import net.lax1dude.eaglercraft.v1_8.log4j.Logger;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.InputStream;
@@ -36,17 +40,21 @@ import com.archclient.client.ui.module.ACModulesGui;
 import com.archclient.client.ui.overlay.Alert;
 import com.archclient.client.ui.overlay.OverlayGui;
 import com.archclient.client.ui.util.RenderUtil;
+import com.archclient.client.util.SessionServer;
 import com.archclient.client.util.cosmetic.Cosmetic;
 import com.archclient.client.util.friend.FriendsManager;
 import com.archclient.client.util.friend.Status;
 import com.archclient.client.util.thread.ServerStatusThread;
 import com.archclient.client.util.title.TitleManager;
+import com.archclient.client.util.voicechat.VoiceChatManager;
 import com.archclient.client.util.worldborder.WorldBorderManager;
 import com.archclient.client.websocket.AssetsWebSocket;
 import com.archclient.impl.ref.BridgedGL;
 import com.archclient.impl.ref.DrawingUtils;
 import com.archclient.impl.ref.InstanceCreator;
+import com.archclient.impl.ref.RefUtils;
 import com.archclient.main.identification.MinecraftVersion;
+import com.archclient.util.Utils;
 
 public class ArchClient
 {
@@ -65,11 +73,14 @@ public class ArchClient
     public ConfigManager configManager;
     public EventBus eventBus;
 
+    public List<SessionServer> statusServers;
     public List<ResourceLocation> presetLocations;
 
     public NetHandler netHandler;
     public TitleManager titleManager;
     public WorldBorderManager borderManager;
+
+    private VoiceChatManager voiceChatManager;
 
     private List<Cosmetic> cosmetics = new ArrayList<>();
     private AssetsWebSocket websocket;
@@ -105,6 +116,9 @@ public class ArchClient
     public EventBus getEventBus() {
         return this.eventBus;
     }
+    public List<SessionServer> getStatusServers() {
+        return this.statusServers;
+    }
     public List<ResourceLocation> getPresetLocations() {
         return this.presetLocations;
     }
@@ -116,6 +130,9 @@ public class ArchClient
     }
     public WorldBorderManager getBorderManager() {
         return this.borderManager;
+    }
+    public VoiceChatManager getVoiceChatManager() {
+        return this.voiceChatManager;
     }
     public List<Cosmetic> getCosmetics() {
         return this.cosmetics;
@@ -173,25 +190,27 @@ public class ArchClient
             Ref.setGlBridge(new BridgedGL());
             Ref.setDrawingUtils(new DrawingUtils());
             Ref.setMinecraft(Minecraft.getMinecraft());
-            //Ref.setI18n(I18n::format);
-            //Ref.setBlockRegistry(Utils.iteratorToIterable(Utils.convertIterationType(Block.blockRegistry.iterator())));
-            //Ref.setBossStatus(new BridgedBossStatus());
-            //Ref.setRenderHelper(new BridgedRenderHelper());
-            //Ref.setRenderManager(Ref.getMinecraft().bridge$getRenderManager());
-            //Ref.setForgeEventBus(MinecraftForge.EVENT_BUS::register);
+            Ref.setI18n(I18n::format);
+            Ref.setBlockRegistry(Utils.iteratorToIterable(Utils.convertIterationType(Block.blockRegistry.iterator())));
+            Ref.setBossStatus(new BossStatus());
+            Ref.setRenderHelper(new RenderHelper());
+            Ref.setRenderManager(Ref.getMinecraft().getRenderManager());
             Ref.setTessellator(Tessellator.getInstance());
             Ref.setInstanceCreator(new InstanceCreator());
-            //Ref.setUtils(new RefUtils());
+            Ref.setUtils(new RefUtils());
 
             Ref.getImplementations().setTextureUtil(new TextureUtil());
 
             this.presetLocations = new ArrayList<>();
             this.cosmetics = new ArrayList<>();
+            this.statusServers = new ArrayList<>();
             this.profiles = new ArrayList<>();
             this.consoleLines = new ArrayList<>();
             this.acInfo("Starting ArchClient setup...");
             this.createDefaultConfigPresets();
             this.acInfo("Created default configuration presets.");
+            this.voiceChatManager = new VoiceChatManager();
+            this.acInfo("Created Voice Chat Manager", VoiceChatManager.class);
             this.globalSettings = new GlobalSettings();
             this.acInfo("Created Settings Manager", GlobalSettings.class);
             this.eventBus = new EventBus();

@@ -6,6 +6,8 @@ import com.archclient.client.event.type.GuiDrawEvent;
 import com.archclient.client.module.AbstractModule;
 import com.archclient.client.ui.module.ACGuiAnchor;
 
+import net.lax1dude.eaglercraft.v1_8.Keyboard;
+
 public class KeystrokesModule
         extends AbstractModule {
     private final Setting showClicks;
@@ -85,12 +87,10 @@ public class KeystrokesModule
     }
 
     public void initialize() {
-    // TODO: Fix NullPointerException caused by line 91
-
-/*        int n = this.minecraft.bridge$getGameSettings().bridge$getKeyBindForward().bridge$getKeyCode();
-        int n2 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindLeft().bridge$getKeyCode();
-        int n3 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindBack().bridge$getKeyCode();
-        int n4 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindRight().bridge$getKeyCode();
+        int n = this.minecraft.gameSettings.keyBindForward.getKeyCode();
+        int n2 = this.minecraft.gameSettings.keyBindLeft.getKeyCode();
+        int n3 = this.minecraft.gameSettings.keyBindBack.getKeyCode();
+        int n4 = this.minecraft.gameSettings.keyBindRight.getKeyCode();
         int boxSize = (Integer)this.boxSize.getValue();
         int gap = (Integer)this.gap.getValue();
         float fadeTime = (Integer) this.fadeTime.getValue();
@@ -102,9 +102,9 @@ public class KeystrokesModule
         float leftKeyWidth = (float)this.minecraft.fontRendererObj.getStringWidth(a) * (Float) this.scale.getValue();
         float downKeyWidth = (float)this.minecraft.fontRendererObj.getStringWidth(s) * (Float) this.scale.getValue();
         float rightKeyWidth = (float)this.minecraft.fontRendererObj.getStringWidth(d) * (Float) this.scale.getValue();
-        int jump = this.minecraft.bridge$getGameSettings().bridge$getKeyBindJump().bridge$getKeyCode();
-        int attack = this.minecraft.bridge$getGameSettings().bridge$getKeyBindAttack().bridge$getKeyCode();
-        int use = this.minecraft.bridge$getGameSettings().bridge$getKeyBindUseItem().bridge$getKeyCode();
+        int jump = this.minecraft.gameSettings.keyBindJump.getKeyCode();
+        int attack = this.minecraft.gameSettings.keyBindAttack.getKeyCode();
+        int use = this.minecraft.gameSettings.keyBindUseItem.getKeyCode();
         boolean bl = (Boolean)this.replaceNamesWithArrows.getValue();
         this.upKey = new Key(bl ? "▲" : (upKeyWidth > (float)boxSize ? w.substring(0, 1) : w), n, boxSize, boxSize, fadeTime);
         this.leftKey = new Key(bl ? "◀" : (leftKeyWidth > (float)boxSize ? a.substring(0, 1) : a), n2, boxSize, boxSize, fadeTime);
@@ -113,6 +113,6 @@ public class KeystrokesModule
         float f5 = (this.leftKey.getWidth() + this.downkey.getWidth() + this.rightKey.getWidth() + gap) / 2.0f;
         this.leftMouseKey = new Key(boxSize < 14 ? "L" : "LMB", attack, f5, boxSize, fadeTime);
         this.rightMouseKey = new Key(boxSize < 14 ? "R" : "RMB", use, f5, boxSize, fadeTime);
-        this.spaceBarKey = new Key(Keyboard.getKeyName(jump), jump, this.leftKey.getWidth() + this.downkey.getWidth() + this.rightKey.getWidth() + gap*2, (float)boxSize / 2, fadeTime);*/
+        this.spaceBarKey = new Key(Keyboard.getKeyName(jump), jump, this.leftKey.getWidth() + this.downkey.getWidth() + this.rightKey.getWidth() + gap*2, (float)boxSize / 2, fadeTime);
     }
 }

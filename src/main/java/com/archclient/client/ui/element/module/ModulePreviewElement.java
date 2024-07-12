@@ -8,6 +8,7 @@ import net.lax1dude.eaglercraft.v1_8.minecraft.EaglerFontRenderer;
 
 import com.archclient.client.config.Setting;
 import com.archclient.client.module.AbstractModule;
+import com.archclient.client.module.type.cooldowns.CooldownRenderer;
 import com.archclient.client.ui.element.AbstractModulesGuiElement;
 import com.archclient.client.ui.element.AbstractScrollableElement;
 import com.archclient.client.ui.module.ACModulePlaceGui;
@@ -32,7 +33,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         EaglerFontRenderer hideOrToggleFontRenderer = FontRegistry.getPlayRegular14px();
         this.optionsButton = new ModulesGuiButtonElement(optionsFontRenderer, null, "Options", this.x + 4, this.y + this.height - 20, this.x + this.width - 4, this.y + this.height - 6, -12418828, f);
         this.toggleOrHideFromHud = new ModulesGuiButtonElement(hideOrToggleFontRenderer, null, module.getGuiAnchor() == null ? (module.isRenderHud() ? "Disable" : "Enable") : (module.isRenderHud() ? "Hide from HUD" : "Add to HUD"), this.x + 4, this.y + this.height - 38, this.x + this.width / 2 - 2, this.y + this.height - 24, module.isRenderHud() ? -5756117 : -13916106, f);
-        //XXXthis.toggleOrHideFromHud.setField1(module != ArchClient.getInstance().moduleManager.notifications);
+        this.toggleOrHideFromHud.setField1(module != ArchClient.getInstance().moduleManager.notifications);
         this.toggle = new ModulesGuiButtonElement(hideOrToggleFontRenderer, null, module.isEnabled() ? "Disable" : "Enable", this.x + this.width / 2 + 2, this.y + this.height - 38, this.x + this.width - 4, this.y + this.height - 24, module.isEnabled() ? -5756117 : -13916106, f);
     }
 
@@ -49,7 +50,6 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         Ref.getGlBridge().bridge$pushMatrix();
         int n3 = 0;
         int n4 = 0;
-        /*XXX
         if (this.module == ArchClient.getInstance().moduleManager.armourStatus) {
             n3 = -10;
             object = "329/329";
@@ -95,7 +95,6 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
             Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             RenderUtil.renderIcon(this.module.getPreviewIcon(), (float)(this.x + this.width / 2) - f4 / 2.0f + (float)n4, (float)(this.y + n3 + this.height / 2 - 26) - f2 / 2.0f, f4, f2);
         }
-        */
         Ref.getGlBridge().bridge$popMatrix();
         float moduleNameOffset = this.y + this.height / 2f;
         playBold18px.drawCenteredString(this.module.getName(), (float)(this.x + this.width / 2) - 1.0681819f * 0.46808508f, moduleNameOffset + 1, 0x5F000000);

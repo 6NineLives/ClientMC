@@ -71,7 +71,7 @@ public class SliderElement extends AbstractModulesGuiElement {
                     this.setting.setValue(Double.parseDouble(this.val + ""));
                 }
             }
-            //xxxArchClient.getInstance().moduleManager.keyStrokes.initialize();
+            ArchClient.getInstance().moduleManager.keyStrokes.initialize();
         }
         f3 = (f3 = this.setting.<Number>value().floatValue()) < this.initialValue ? this.initialValue - f3 : (f3 -= this.initialValue);
         float f6 = ((maxVal - minVal) / (float)20 + f3 * (float)8) / (float)(Minecraft.getDebugFPS() + 1);

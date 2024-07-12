@@ -15,6 +15,7 @@ import com.archclient.client.ui.util.RenderUtil;
 import com.archclient.client.ui.util.font.FontRegistry;
 import com.archclient.client.util.friend.Friend;
 import com.archclient.client.util.friend.FriendsManager;
+import com.archclient.client.websocket.client.WSPacketClientFriendRemove;
 
 import java.util.List;
 
@@ -84,7 +85,7 @@ public class FriendElement extends AbstractElement {
         boolean bl2 = this.isMouseInside(mouseX, mouseY) && mouseX > this.x + this.width - (float) 20;
         if (bl2 && this.lIIIIllIIlIlIllIIIlIllIlI.isExpired()) {
             this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            //xxxArchClient.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRemove(this.friend.getPlayerId()));
+            ArchClient.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRemove(this.friend.getPlayerId()));
             OverlayGui.getInstance().getFriendsListElement().getFriendElements().add(this);
             ArchClient.getInstance().getFriendsManager().getFriends().remove(this.friend.getPlayerId());
             return true;

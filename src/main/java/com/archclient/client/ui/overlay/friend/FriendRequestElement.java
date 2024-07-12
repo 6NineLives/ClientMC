@@ -10,6 +10,7 @@ import com.archclient.client.ui.mainmenu.AbstractElement;
 import com.archclient.client.ui.overlay.OverlayGui;
 import com.archclient.client.ui.util.RenderUtil;
 import com.archclient.client.ui.util.font.FontRegistry;
+import com.archclient.client.websocket.shared.WSPacketClientFriendRequestUpdate;
 
 public class FriendRequestElement extends AbstractElement {
     private final FriendRequest friendRequest;
@@ -52,7 +53,7 @@ public class FriendRequestElement extends AbstractElement {
             boolean cancelHovered  = mouseX > this.x + (float) 24 && mouseX < this.x + (float) 52 && mouseY < this.y + this.height && mouseY > this.y + (float) 10;
             if (cancelHovered) {
                 this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                //xxxArchClient.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
+                ArchClient.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             }
         } else {
@@ -60,11 +61,11 @@ public class FriendRequestElement extends AbstractElement {
             boolean denyHovered = mouseX > this.x + (float) 52 && mouseX < this.x + (float) 84 && mouseY < this.y + this.height && mouseY > this.y + (float) 10;
             if (acceptHovered) {
                 this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                //xxxArchClient.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(true, this.friendRequest.getPlayerId()));
+                ArchClient.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(true, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             } else if (denyHovered) {
                 this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                //xxxArchClient.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
+                ArchClient.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             }
         }

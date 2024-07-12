@@ -152,7 +152,7 @@ public class ProfileElement extends AbstractModulesGuiElement {
             if (ArchClient.getInstance().activeProfile == this.profile) {
                 ArchClient.getInstance().activeProfile = ArchClient.getInstance().profiles.get(0);
                 ArchClient.getInstance().configManager.readProfile(ArchClient.getInstance().activeProfile.getName());
-                //XXXArchClient.getInstance().moduleManager.keyStrokes.initialize();
+                ArchClient.getInstance().moduleManager.keyStrokes.initialize();
             }
             if (this.profile.isEditable() && (file2 = (file = new VFile2("config", "client", "profiles")) != null ? new VFile2(file, this.profile.getName().toLowerCase() + ".cfg") : null).exists() && file2.delete()) {
                 ArchClient.getInstance().profiles.removeIf(ilIIlIIlIIlllIlIIIlIllIIl -> ilIIlIIlIIlllIlIIIlIllIIl == this.profile);
@@ -166,7 +166,7 @@ public class ProfileElement extends AbstractModulesGuiElement {
             ArchClient.getInstance().configManager.writeProfile(ArchClient.getInstance().activeProfile.getName());
             ArchClient.getInstance().activeProfile = this.profile;
             ArchClient.getInstance().configManager.readProfile(ArchClient.getInstance().activeProfile.getName());
-            //xxxArchClient.getInstance().moduleManager.keyStrokes.initialize();
+            ArchClient.getInstance().moduleManager.keyStrokes.initialize();
         }
     }
 }

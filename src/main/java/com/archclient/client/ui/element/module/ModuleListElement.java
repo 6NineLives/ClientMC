@@ -4,6 +4,7 @@ import com.archclient.bridge.ref.Ref;
 import com.archclient.main.ArchClient;
 import com.archclient.client.config.Setting;
 import com.archclient.client.module.AbstractModule;
+import com.archclient.client.module.staff.StaffModule;
 import com.archclient.client.ui.element.AbstractModulesGuiElement;
 import com.archclient.client.ui.element.AbstractScrollableElement;
 import com.archclient.client.ui.element.type.*;
@@ -56,7 +57,7 @@ public class ModuleListElement extends AbstractScrollableElement {
                     case DOUBLE:
                     case INTEGER:
                     case FLOAT: {
-                        //XXXif (object.isStaffModule() && aCSetting == ((StaffModule)object).getKeybindSetting() || object.isStaffModule() && aCSetting == object.scale) break;
+                        if (object.isStaffModule() && aCSetting == ((StaffModule)object).getKeybindSetting() || object.isStaffModule() && aCSetting == object.scale) break;
                         if (aCSetting.getType().equals(Setting.Type.INTEGER) && aCSetting.getLabel().toLowerCase().contains("color")) {
                             object2.add(new ColorPickerElement(aCSetting, f));
                             break;
@@ -75,10 +76,10 @@ public class ModuleListElement extends AbstractScrollableElement {
                 }
             }
             if (object.isStaffModule()) {
-                //XXXobject2.add(new KeybindElement(((StaffModule)object).getKeybindSetting(), f));
-                //if (object == ArchClient.getInstance().moduleManager.xray) {
-                //    object2.add(new XRayOptionsElement(ArchClient.getInstance().moduleManager.xray.lIllIllIlIIllIllIlIlIIlIl(), "Blocks", f));
-                //}
+                object2.add(new KeybindElement(((StaffModule)object).getKeybindSetting(), f));
+                if (object == ArchClient.getInstance().moduleManager.xray) {
+                    object2.add(new XRayOptionsElement(ArchClient.getInstance().moduleManager.xray.lIllIllIlIIllIllIlIlIIlIl(), "Blocks", f));
+                }
             }
             this.moduleElementListMap.put(object, object2);
         }

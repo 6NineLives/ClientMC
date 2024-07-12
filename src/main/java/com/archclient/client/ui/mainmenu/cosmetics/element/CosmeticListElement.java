@@ -88,7 +88,7 @@ public class CosmeticListElement extends AbstractModulesGuiElement {
                 }
                 this.cosmetic.setEquipped(true);
             }
-            //XXXArchClient.getInstance().getAssetsWebSocket().sendClientCosmetics();
+            ArchClient.getInstance().getAssetsWebSocket().sendClientCosmetics();
         }
     }
 }

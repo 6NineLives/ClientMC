@@ -139,7 +139,6 @@ public class FontRegistry {
         // This should never happen BUT in the off chance it does
         return new EaglerFontRenderer(Ref.getMinecraft().gameSettings,
                 Ref.getInstanceCreator().createResourceLocation("null"), Ref.getMinecraft().getTextureManager(), false);
-        //xxxEaglerFontRenderer(Ref.getInstanceCreator().createResourceLocation("null"), 20f);
     }
 
     // Textures

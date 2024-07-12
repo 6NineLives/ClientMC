@@ -1,5 +1,6 @@
 package com.archclient.bridge.ref;
 
+import com.archclient.bridge.client.resources.I18nBridge;
 import com.archclient.bridge.ext.GLBridge;
 import com.archclient.bridge.ref.implementations.Implementations;
 import com.archclient.impl.ref.DrawingUtils;
@@ -8,12 +9,12 @@ import com.archclient.impl.ref.RefUtils;
 import com.archclient.main.identification.MinecraftVersion;
 
 import net.lax1dude.eaglercraft.v1_8.opengl.WorldRenderer;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.boss.BossStatus;
 
 public class Ref {
@@ -22,7 +23,8 @@ public class Ref {
     private static GLBridge glBridge = null;
     private static DrawingUtils drawingUtils = null;
     private static Minecraft minecraft = null;
-    private static I18n i18n = null;
+    private static I18nBridge i18n = null;
+    private static Iterable<Block> blockRegistry = null;
     private static BossStatus bossStatus = null;
     private static RenderHelper renderHelper = null;
     private static RenderManager renderManager = null;
@@ -55,11 +57,17 @@ public class Ref {
     public static void setMinecraft(Minecraft minecraft) {
         Ref.minecraft = minecraft;
     }
-    public static I18n getI18n() {
+    public static I18nBridge getI18n() {
         return i18n;
     }
-    public static void setMinecraft(I18n i18n) {
+    public static void setI18n(I18nBridge i18n) {
         Ref.i18n = i18n;
+    }
+    public static Iterable<Block> getBlockRegistry() {
+        return blockRegistry;
+    }
+    public static void setBlockRegistry(Iterable<Block> blockRegistry) {
+        Ref.blockRegistry = blockRegistry;
     }
     public static BossStatus getBossStatus() {
         return bossStatus;

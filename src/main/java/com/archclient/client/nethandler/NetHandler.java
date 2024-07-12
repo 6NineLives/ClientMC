@@ -5,13 +5,20 @@ import com.archclient.bridge.util.EnumChatFormattingBridge;
 import com.archclient.main.ArchClient;
 import com.archclient.client.event.type.PluginMessageEvent;
 import com.archclient.client.module.AbstractModule;
+import com.archclient.client.module.staff.StaffModule;
+import com.archclient.client.module.type.cooldowns.CooldownsModule;
 import com.archclient.client.nethandler.client.IACNetHandlerClient;
 import com.archclient.client.nethandler.client.PacketVoiceChannelSwitch;
 import com.archclient.client.nethandler.server.*;
 import com.archclient.client.nethandler.shared.PacketAddWaypoint;
 import com.archclient.client.nethandler.shared.PacketRemoveWaypoint;
+import com.archclient.client.ui.util.Color;
 import com.archclient.client.util.hologram.Hologram;
+import com.archclient.client.util.teammates.Teammate;
 import com.archclient.client.util.title.Title;
+import com.archclient.client.util.voicechat.VoiceChannel;
+import com.archclient.client.util.voicechat.VoiceUser;
+import com.archclient.common.KeyMappings;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import net.lax1dude.eaglercraft.v1_8.EaglercraftUUID;
@@ -28,10 +35,14 @@ import java.util.*;
 
 public class NetHandler implements IACNetHandler, IACNetHandlerClient {
 
-    /*xxx
-    @Getter private List<VoiceChannel> voiceChannels;
-    @Getter private VoiceChannel voiceChannel;
-    */
+    private List<VoiceChannel> voiceChannels;
+    private VoiceChannel voiceChannel;
+    public List<VoiceChannel> getVoiceChannels() {
+        return this.voiceChannels;
+    }
+    public VoiceChannel getVoiceChannel() {
+        return this.voiceChannel;
+    }
     private List<EaglercraftUUID> uuidList;
     private List<EaglercraftUUID> anotherUuidList;
     private String world = "";
@@ -55,13 +66,13 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
     }
 
     public NetHandler() {
-        //xxxthis.voiceChannels = new ArrayList<>();
+        this.voiceChannels = new ArrayList<>();
         this.anotherUuidList = new ArrayList<>();
         this.uuidList = new ArrayList<>();
     }
 
     private void initialize() {
-        //xxxthis.voiceChannels = null;
+        this.voiceChannels = null;
         this.anotherUuidList.clear();
         this.competitiveGamemode = false;
         this.voiceChatEnabled = true;
@@ -69,17 +80,15 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
         this.world = "";
         this.nametagsMap = new HashMap<>();
         for (AbstractModule aCModule : ArchClient.getInstance().getModuleManager().staffModules) {
-            //xxx((StaffModule)aCModule).disableStaffModule();
+            ((StaffModule)aCModule).disableStaffModule();
         }
-        /*xxx
         ArchClient.getInstance().getBorderManager().lIIIIlIIllIIlIIlIIIlIIllI();
         Hologram.getHolograms().clear();
         ArchClient.getInstance().getModuleManager().teammatesModule.getTeammates().clear();
-        */
         this.lIIIIlIIllIIlIIlIIIlIIllI();
     }
     public void lIIIIlIIllIIlIIlIIIlIIllI() {
-        //xxxArchClient.getInstance().getTitleManager().getTitles().clear();
+        ArchClient.getInstance().getTitleManager().getTitles().clear();
     }
 
     public void onPluginMessage(PluginMessageEvent pluginMessageEvent) {
@@ -140,12 +149,12 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
 
     @Override
     public void handleCooldown(PacketCooldown packet) {
-        //xxxCooldownsModule.lIIIIlIIllIIlIIlIIIlIIllI(packet.getMessage(), packet.getDurationMs(), packet.getIconId());
+        CooldownsModule.lIIIIlIIllIIlIIlIIIlIIllI(packet.getMessage(), packet.getDurationMs(), packet.getIconId());
     }
 
     @Override
     public void handleNotification(PacketNotification aCPacketNotification) {
-        //xxxArchClient.getInstance().getModuleManager().notifications.queueNotification(aCPacketNotification.getLevel(), aCPacketNotification.getLevel(), aCPacketNotification.getDurationMs());
+        ArchClient.getInstance().getModuleManager().notifications.queueNotification(aCPacketNotification.getLevel(), aCPacketNotification.getLevel(), aCPacketNotification.getDurationMs());
     }
 
     @Override
@@ -177,14 +186,13 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
         Map<EaglercraftUUID, Map<String, Double>> map = packet.getPlayers();
         EaglercraftUUID uUID = packet.getLeader();
         long l = packet.getLastMs();
-        /*xxx
-        if (!ArchClient.getInstance().getGlobalSettings().enableTeamView.<Boolean>value() || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().thePlayer.bridge$getUniqueID())) {
+        if (!ArchClient.getInstance().getGlobalSettings().enableTeamView.<Boolean>value() || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().thePlayer.getUniqueID())) {
             ArchClient.getInstance().getModuleManager().teammatesModule.getTeammates().clear();
             System.out.println("[AC Teammates] Cleared Map..");
             return;
         }
         int n = 0;
-        for (Map.Entry<UUID, Map<String, Double>> entry : map.entrySet()) {
+        for (Map.Entry<EaglercraftUUID, Map<String, Double>> entry : map.entrySet()) {
             System.out.println("[AC Teammates] Entry: " + entry.toString());
             Teammate teammate = ArchClient.getInstance().getModuleManager().teammatesModule.getTeammate((entry.getKey()).toString());
             if (teammate == null) {
@@ -212,8 +220,7 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
             }
             ++n;
         }
-        ArchClient.getInstance().getModuleManager().teammatesModule.getTeammates().removeIf(teammate -> !map.containsKey(UUID.fromString(teammate.getUuid())));
-        */
+        ArchClient.getInstance().getModuleManager().teammatesModule.getTeammates().removeIf(teammate -> !map.containsKey(EaglercraftUUID.fromString(teammate.getUuid())));
     }
 
     @Override
@@ -275,8 +282,8 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
         if (packet.getUuid().equals(Ref.getMinecraft().thePlayer.getUniqueID()))
             return;
         //Message.f(packet.getUuid().toString(), packet.getData());
-        //xxxArchClient.getInstance().getVoiceChatManager().handleIncoming(packet);
-        //xxxArchClient.getInstance().getModuleManager().voiceChat.addUserToSpoken(packet.getUuid());
+        ArchClient.getInstance().getVoiceChatManager().handleIncoming(packet);
+        ArchClient.getInstance().getModuleManager().voiceChat.addUserToSpoken(packet.getUuid());
 
     }
 
@@ -286,7 +293,6 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
         System.out.println("[AC Voice] Voice Channel Received: " + packet.getName());
         System.out.println(" - [AC Voice] Channel has " + packet.getPlayers().size() + " members");
 
-        /*xxx
         if (this.doesVoiceChannelExist(packet.getUuid())) {
             System.out.println("[AC Voice] the player is already in this channel. (" + packet.getName() + ")");
             return;
@@ -300,7 +306,7 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
 
         List<VoiceUser> voiceUserList = new ArrayList<>();
 
-        for (Map.Entry<UUID, String> entry : packet.getPlayers().entrySet()) {
+        for (Map.Entry<EaglercraftUUID, String> entry : packet.getPlayers().entrySet()) {
             VoiceUser voiceUser = voiceChannel.getOrCreateVoiceUser(entry.getKey(), entry.getValue());
             if (voiceUser == null) continue;
             System.out.println("[AC] Added member [" + entry.getValue() + "]");
@@ -308,18 +314,16 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
         }
 
         this.addUsers(voiceUserList);
-        for (Map.Entry<UUID, String> entry : packet.getPlayers().entrySet()) {
+        for (Map.Entry<EaglercraftUUID, String> entry : packet.getPlayers().entrySet()) {
             System.out.println("[AC] Added listener [" + entry.getValue() + "]");
             voiceChannel.addToListening(entry.getKey());
         }
-        */
     }
 
     @Override
     public void handleVoiceChannelUpdate(PacketVoiceChannelUpdate packet) {
         System.out.println("[AC Voice] Channel Update: " + packet.getName() + " (" + packet.getStatus() + ")");
         System.out.println(packet.toString());
-        /*xxx
         if (this.voiceChannels == null) {
             System.err.println("Gay coon is null");
             return;
@@ -348,30 +352,30 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
             }
             case 2: {
                 System.out.println("[AC Voice] Joined " + voiceChannel.getChannelName() + " channel.");
-                System.out.println("[AC Voice] " + packet.getUuid() + " - " + Ref.getMinecraft().bridge$getSession()
-                        .bridge$getPlayerID());
+                System.out.println("[AC Voice] " + packet.getUuid() + " - " + Ref.getMinecraft().getSession()
+                        .getProfile().getId());
 
-                if (packet.getName().equals(Ref.getMinecraft().bridge$getSession().bridge$getPlayerID())) {
+                if (packet.getName().equals(Ref.getMinecraft().getSession().getProfile().getId().toString())) {
                     this.voiceChannel = voiceChannel;
                     for (VoiceChannel voiceChannel2 : this.voiceChannels) {
                         voiceChannel2.removeListener(packet.getUuid());
                     }
-                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator()
+                    ChatComponentText chatComponentText = Ref.getInstanceCreator()
                             .createChatComponentText(EnumChatFormattingBridge.AQUA + "Joined "
                                     + voiceChannel.getChannelName() + " channel. Press '"
-                                    + Keyboard.getKeyName(KeyMappings.PUSH_TO_TALK.bridge$getKeyCode()) + "' to talk!"
+                                    + Keyboard.getKeyName(KeyMappings.PUSH_TO_TALK.getKeyCode()) + "' to talk!"
                                     + EnumChatFormattingBridge.RESET);
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI()
-                            .bridge$printChatMessage(chatComponentText);
+                    Ref.getMinecraft().ingameGUI.getChatGUI()
+                            .printChatMessage(chatComponentText);
                 } else if (this.voiceChannel == voiceChannel) {
-                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator()
+                    ChatComponentText chatComponentText = Ref.getInstanceCreator()
                             .createChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName()
                                     + EnumChatFormattingBridge.AQUA + " joined "
                                     + voiceChannel.getChannelName() + " channel. Press '"
-                                    + Keyboard.getKeyName(KeyMappings.OPEN_VOICE_MENU.bridge$getKeyCode()) + "'!"
+                                    + Keyboard.getKeyName(KeyMappings.OPEN_VOICE_MENU.getKeyCode()) + "'!"
                                     + EnumChatFormattingBridge.RESET);
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI()
-                            .bridge$printChatMessage(chatComponentText);
+                    Ref.getMinecraft().ingameGUI.getChatGUI()
+                            .printChatMessage(chatComponentText);
                 }
                 voiceChannel.addToListening(packet.getUuid());
                 break;
@@ -379,33 +383,30 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
             case 3: {
                 // remove listening
                 if (this.voiceChannel == voiceChannel && !packet.getUuid().toString().equals(Ref.getMinecraft()
-                        .bridge$getSession().bridge$getPlayerID())) {
-                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator()
+                        .getSession().getProfile().getId().toString())) {
+                    ChatComponentText chatComponentText = Ref.getInstanceCreator()
                             .createChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName()
                                     + EnumChatFormattingBridge.AQUA + " left "
                                     + voiceChannel.getChannelName() + " channel. Press '"
-                                    + Keyboard.getKeyName(KeyMappings.OPEN_VOICE_MENU.bridge$getKeyCode()) + "'!"
+                                    + Keyboard.getKeyName(KeyMappings.OPEN_VOICE_MENU.getKeyCode()) + "'!"
                                     + EnumChatFormattingBridge.RESET);
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI()
-                            .bridge$printChatMessage(chatComponentText);
+                    Ref.getMinecraft().ingameGUI.getChatGUI()
+                            .printChatMessage(chatComponentText);
                 }
                 voiceChannel.removeListener(packet.getUuid());
             }
         }
-        */
     }
 
     @Override
     public void handleDeleteVoiceChannel(PacketDeleteVoiceChannel acPacketDeleteVoiceChannel) {
         System.out.println("[AC] Deleted channel: " + acPacketDeleteVoiceChannel.getUuid().toString());
-        /*xxx
         if (this.voiceChannels != null) {
             this.voiceChannels.removeIf(voiceChannel -> voiceChannel.getUuid().equals(acPacketDeleteVoiceChannel.getUuid()));
         }
         if (this.voiceChannel != null && this.voiceChannel.getUuid().equals(acPacketDeleteVoiceChannel.getUuid())) {
             this.voiceChannel = null;
         }
-        */
     }
 
     @Override
@@ -437,12 +438,11 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
 
     // Util Methods
 
-    /*xxx
-    private boolean doesVoiceChannelExist(UUID uUID) {
+    private boolean doesVoiceChannelExist(EaglercraftUUID uUID) {
         return this.getVoiceChannel(uUID) != null;
     }
 
-    public VoiceUser getVoiceUser(UUID uuid) {
+    public VoiceUser getVoiceUser(EaglercraftUUID uuid) {
         if (this.voiceChannels == null || this.voiceChannel == null) {
             return null;
         }
@@ -453,7 +453,7 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
         return null;
     }
 
-    private VoiceChannel getVoiceChannel(UUID uuid) {
+    private VoiceChannel getVoiceChannel(EaglercraftUUID uuid) {
         if (this.voiceChannels == null) {
             System.err.println("[AC Voice] Voice channels is null");
             return null;
@@ -472,7 +472,7 @@ public class NetHandler implements IACNetHandler, IACNetHandlerClient {
             this.sendPacketToQueue(new PacketVoiceChannelSwitch(voiceUser.getUUID()));
         }
     }
-    */
+
     public void sendPacketToQueue(Packet packet) {
         Object object;
         if (packet != null && ArchClient.getInstance().getGlobalSettings().isDebug) {
