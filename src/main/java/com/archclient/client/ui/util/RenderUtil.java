@@ -149,10 +149,10 @@ public class RenderUtil {
             };
 
             worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-            worldrenderer.pos(d + arrd2[0], d2 + arrd2[1], 0.0).color(GLColor.glsmCurrentColor.getRed(), GLColor.glsmCurrentColor.getGreen(), GLColor.glsmCurrentColor.getBlue(), GLColor.glsmCurrentColor.getAlpha()).endVertex();
-            worldrenderer.pos(d + arrd2[2], d2 + arrd2[3], 0.0).color(GLColor.glsmCurrentColor.getRed(), GLColor.glsmCurrentColor.getGreen(), GLColor.glsmCurrentColor.getBlue(), GLColor.glsmCurrentColor.getAlpha()).endVertex();
-            worldrenderer.pos(d + arrd[2], d2 + arrd[3], 0.0).color(GLColor.glsmCurrentColor.getRed(), GLColor.glsmCurrentColor.getGreen(), GLColor.glsmCurrentColor.getBlue(), GLColor.glsmCurrentColor.getAlpha()).endVertex();
-            worldrenderer.pos(d + arrd[0], d2 + arrd[1], 0.0).color(GLColor.glsmCurrentColor.getRed(), GLColor.glsmCurrentColor.getGreen(), GLColor.glsmCurrentColor.getBlue(), GLColor.glsmCurrentColor.getAlpha()).endVertex();
+            worldrenderer.pos(d + arrd2[0], d2 + arrd2[1], 0.0).endVertex();
+            worldrenderer.pos(d + arrd2[2], d2 + arrd2[3], 0.0).endVertex();
+            worldrenderer.pos(d + arrd[2], d2 + arrd[3], 0.0).endVertex();
+            worldrenderer.pos(d + arrd[0], d2 + arrd[1], 0.0).endVertex();
             tessellator.draw();
         }
         Ref.getGlBridge().bridge$enableTexture2D();

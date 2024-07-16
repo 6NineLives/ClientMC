@@ -1,5 +1,7 @@
 package com.archclient.client.module.type.cooldowns;
 
+import java.text.DecimalFormat;
+
 import com.archclient.bridge.ref.Ref;
 import com.archclient.client.config.Setting;
 import com.archclient.client.module.type.armourstatus.ArmourStatusModule;
@@ -73,7 +75,8 @@ public class CooldownRenderer {
             Ref.getGlBridge().bridge$color(f3, f7, f8, 0.058333337f * 2.5714285f);
             RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, (float)n2 + 0.31707317f * 0.31538463f, n2 - 2, (float)this.duration / (4.761644f * 0.82954544f), (int)this.duration, d);
         }
-        String string = String.format("%.1f", d / (double)1000);
+        final DecimalFormat df = new DecimalFormat("0.##");
+        String string = df.format(d / (double)1000);
         FontRegistry.getUbuntuMedium16px().drawCenteredStringWithShadow(string, f + (float)n2, f2 + (float)(n2 / 2) + 4, -1);
     }
 
