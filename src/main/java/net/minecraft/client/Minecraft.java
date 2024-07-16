@@ -741,7 +741,7 @@ public class Minecraft implements IThreadListener {
      * screen.
      */
     public void displayGuiScreen(GuiScreen guiScreenIn) {
-        if (guiScreenIn instanceof GuiScreenEditProfile || (guiScreenIn == null && this.theWorld == null)) {
+        if (guiScreenIn instanceof GuiMainMenu || guiScreenIn instanceof GuiScreenEditProfile || (guiScreenIn == null && this.theWorld == null)) {
             this.bridge$displayGuiScreen(new MainMenu());
             return;
         }
