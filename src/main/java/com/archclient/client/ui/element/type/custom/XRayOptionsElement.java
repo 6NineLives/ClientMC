@@ -41,7 +41,7 @@ public class XRayOptionsElement
         for (Object obj : Ref.getBlockRegistry()) {
             Block block = (Block) obj;
             boolean bl;
-            Item item = (Item) Item.getItemFromBlock((Block) ((Object) this));
+            Item item = (Item) Item.getItemFromBlock((Block) ((Object) block));
             if (item == null) continue;
             if (n3 >= 15) {
                 n3 = 0;
@@ -50,7 +50,7 @@ public class XRayOptionsElement
             int n5 = this.x + 12 + n3 * 20;
             int n6 = this.y + 14 + n4 * 20;
             boolean bl2 = bl = (float) mouseX > (float)(n5 - 2) * this.scale && (float) mouseX < (float)(n5 + 18) * this.scale && (float) mouseY > (float)(n6 - 2 + this.yOffset) * this.scale && (float) mouseY < (float)(n6 + 18 + this.yOffset) * this.scale;
-            if (list.contains(Item.itemRegistry.getIDForObject((Item) ((Object) this)))) {
+            if (list.contains(Item.itemRegistry.getIDForObject((Item) ((Object) item)))) {
                 Ref.modified$drawRect(n5 - 2, n6 - 2, n5 + 18, n6 + 18, 0x7F00FF00);
             } else if (bl) {
                 Ref.modified$drawRect(n5 - 2, n6 - 2, n5 + 18, n6 + 18, 0x4F0000FF);
@@ -72,7 +72,7 @@ public class XRayOptionsElement
             for (Object obj : Ref.getBlockRegistry()) {
                 Block block = (Block) obj;
                 boolean bl;
-                Item item = (Item) Item.getItemFromBlock((Block) ((Object) this));
+                Item item = (Item) Item.getItemFromBlock((Block) ((Object) block));
                 if (item == null) continue;
                 if (n5 >= 15) {
                     n5 = 0;
@@ -82,7 +82,7 @@ public class XRayOptionsElement
                 int n8 = this.y + 14 + n6 * 20;
                 boolean bl2 = bl = (float) mouseX > (float)(n7 - 2) * this.scale && (float) mouseX < (float)(n7 + 18) * this.scale && (float) mouseY > (float)(n8 - 2 + this.yOffset) * this.scale && (float) mouseY < (float)(n8 + 18 + this.yOffset) * this.scale;
                 if (bl && button == 0) {
-                    int n9 = Item.itemRegistry.getIDForObject((Item) ((Object) this));
+                    int n9 = Item.itemRegistry.getIDForObject((Item) ((Object) item));
                     if (list.contains(n9)) {
                         ArchClient.getInstance().moduleManager.xray.lIllIllIlIIllIllIlIlIIlIl().removeIf(n2 -> n2 == n9);
                     } else {
