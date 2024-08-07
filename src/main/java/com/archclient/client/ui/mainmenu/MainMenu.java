@@ -17,12 +17,12 @@ public class MainMenu extends MainMenuBase {
     private final GradientTextButton singleplayerButton = new GradientTextButton("SINGLEPLAYER");
     private final GradientTextButton multiplayerButton = new GradientTextButton("MULTIPLAYER");
     private final MinMaxFade logoPositionFade = new MinMaxFade(750L);
-    private final CosineFade logoTurnAmount;
+    //private final CosineFade logoTurnAmount;
     private final MinMaxFade loadingScreenBackgroundFade = new MinMaxFade(400L);
     private static int loadCount;
 
     public MainMenu() {
-        this.logoTurnAmount = new CosineFade(4000L);
+        //this.logoTurnAmount = new CosineFade(4000L);
     }
 
     @Override
@@ -31,10 +31,11 @@ public class MainMenu extends MainMenuBase {
         if (this.isFirstOpened() && !this.logoPositionFade.hasStartTime()) {
             this.logoPositionFade.reset();
         }
-        if (!(this.isFirstOpened() && !this.logoPositionFade.isExpired() || this.logoTurnAmount.hasStartTime())) {
+        //if (!(this.isFirstOpened() && !this.logoPositionFade.isExpired()) || this.logoTurnAmount.hasStartTime()) {
+        if (!(this.isFirstOpened() && this.logoPositionFade.isExpired())) {
             this.loadingScreenBackgroundFade.reset();
-            this.logoTurnAmount.reset();
-            this.logoTurnAmount.enableShouldResetOnceCalled();
+        //    this.logoTurnAmount.reset();
+        //    this.logoTurnAmount.enableShouldResetOnceCalled();
         }
     }
 
@@ -92,7 +93,7 @@ public class MainMenu extends MainMenuBase {
         Ref.getGlBridge().bridge$color(1f, 1f, 1f, 1f);
         Ref.getGlBridge().bridge$translate(x, y, 1f);
         Ref.getGlBridge().bridge$translate(halfSize, halfSize, halfSize);
-        GlStateManager.rotate(180f * this.logoTurnAmount.getCurrentValue(), 0f, 0f, 1f);
+        //GlStateManager.rotate(180f * this.logoTurnAmount.getCurrentValue(), 0f, 0f, 1f);
         Ref.getGlBridge().bridge$translate(-halfSize, -halfSize, -halfSize);
         RenderUtil.drawIcon(this.outerLogo, halfSize, 0f, 0f);
         Ref.getGlBridge().bridge$popMatrix();
