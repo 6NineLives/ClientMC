@@ -2,6 +2,12 @@ package net.minecraft.client.multiplayer;
 
 import java.io.IOException;
 
+import com.archclient.bridge.ref.Ref;
+import com.archclient.client.config.types.UnrecommendedServer;
+import com.archclient.client.ui.mainmenu.MainMenu;
+import com.archclient.client.ui.screens.ConnectionWarningScreen;
+import com.archclient.main.ArchClient;
+
 import net.lax1dude.eaglercraft.v1_8.internal.EnumEaglerConnectionState;
 import net.lax1dude.eaglercraft.v1_8.internal.EnumServerRateLimit;
 import net.lax1dude.eaglercraft.v1_8.internal.PlatformNetworking;
@@ -50,6 +56,8 @@ public class GuiConnecting extends GuiScreen {
 	private boolean hasOpened;
 	private final GuiScreen previousGuiScreen;
 	private int timer = 0;
+    private boolean unrecommended = false;
+    private ConnectionWarningScreen screenInstance = null;
 
 	public GuiConnecting(GuiScreen parGuiScreen, Minecraft mcIn, ServerData parServerData) {
 		this(parGuiScreen, mcIn, parServerData, false);
@@ -113,6 +121,12 @@ public class GuiConnecting extends GuiScreen {
 		this.allowPlaintext = allowPlaintext;
 	}
 
+	public void connectCopy() {
+        logger.info("Connecting to: {}", currentAddress);
+        this.networkManager = new EaglercraftNetworkManager(currentAddress);
+        this.networkManager.connect();
+	}
+
 	/**+
 	 * Called from the main game loop to update the screen.
 	 */
@@ -122,9 +136,15 @@ public class GuiConnecting extends GuiScreen {
 			if (this.currentAddress == null) {
 				mc.displayGuiScreen(GuiDisconnected.createRateLimitKick(previousGuiScreen));
 			} else if (this.networkManager == null) {
-				logger.info("Connecting to: {}", currentAddress);
-				this.networkManager = new EaglercraftNetworkManager(currentAddress);
-				this.networkManager.connect();
+		        for (UnrecommendedServer serverData : ArchClient.getInstance().getGlobalSettings().unrecommendedServers) {
+		            if (serverData.matches(this.currentAddress)) {
+		                this.unrecommended = true;
+		                this.screenInstance = new ConnectionWarningScreen(serverData, new MainMenu(), this::connectCopy);
+		            }
+		        }
+		        if (!this.unrecommended) {
+		            this.connectCopy();
+		        }
 			} else {
 				if (this.networkManager.isChannelOpen()) {
 					if (!hasOpened) {
@@ -246,6 +266,9 @@ public class GuiConnecting extends GuiScreen {
 		}
 
 		super.drawScreen(i, j, f);
+        if (this.unrecommended && this.screenInstance != null) {
+            Ref.getMinecraft().bridge$displayGuiScreen(this.screenInstance);
+        }
 	}
 
 	private void checkLowLevelRatelimit() {

@@ -1,5 +1,10 @@
 package net.minecraft.client.gui;
 
+import com.archclient.bridge.ref.Ref;
+import com.archclient.client.ui.mainmenu.MainMenu;
+import com.archclient.client.ui.module.ACModulesGui;
+import com.archclient.common.IngameMenu;
+
 import net.lax1dude.eaglercraft.v1_8.EagRuntime;
 import net.lax1dude.eaglercraft.v1_8.Mouse;
 import net.lax1dude.eaglercraft.v1_8.opengl.GlStateManager;
@@ -82,11 +87,19 @@ public class GuiIngameMenu extends GuiScreen {
 				I18n.format("gui.achievements", new Object[0])));
 		this.buttonList.add(new GuiButton(6, this.width / 2 + 2, this.height / 4 + 48 + b0, 98, 20,
 				I18n.format("gui.stats", new Object[0])));
+
 		lanButton.enabled = SingleplayerServerController.isWorldRunning();
 		if (!hasSentAutoSave) {
 			hasSentAutoSave = true;
 			SingleplayerServerController.autoSave();
 		}
+        if (!lanButton.enabled) {
+            this.buttonList.add(new GuiButton(10, this.width / 2 + 2, this.height / 4 + 96 + b0, 98, 20, "Mods"));
+            this.buttonList.add(new GuiButton(16, this.width / 2 - 100, this.height / 4 + 72 + b0, 200, 20, "Server List"));
+        } else {
+            this.buttonList.add(new GuiButton(16, this.width / 2 - 100, this.height / 4 + 72 + b0, 98, 20, "Server List"));
+            this.buttonList.add(new GuiButton(10, this.width / 2 + 2, this.height / 4 + 72 + b0, 98, 20, "Mods"));
+        }
 	}
 
 	/**+
@@ -99,15 +112,10 @@ public class GuiIngameMenu extends GuiScreen {
 			this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
 			break;
 		case 1:
-			boolean flag = this.mc.isIntegratedServerRunning() || this.mc.isDemo();
-			parGuiButton.enabled = false;
-			this.mc.theWorld.sendQuittingDisconnectingPacket();
-			this.mc.loadWorld((WorldClient) null);
-			if (flag) {
-				this.mc.shutdownIntegratedServer(new GuiMainMenu());
-			} else {
-				this.mc.shutdownIntegratedServer(new GuiMultiplayer(new GuiMainMenu()));
-			}
+            parGuiButton.enabled = false;
+            this.mc.theWorld.sendQuittingDisconnectingPacket();
+            this.mc.loadWorld(null);
+            Ref.getMinecraft().bridge$displayGuiScreen(new MainMenu());
 		case 2:
 		case 3:
 		default:
@@ -137,7 +145,13 @@ public class GuiIngameMenu extends GuiScreen {
 						new GuiShareToLan(this, this.mc.playerController.getCurrentGameType().getName())));
 			}
 			break;
-		}
+        case 10:
+            Ref.getMinecraft().bridge$displayGuiScreen(new ACModulesGui());
+            break;
+        case 16:
+            this.mc.displayGuiScreen(new GuiMultiplayer(this));
+            break;
+	    }
 
 	}
 
@@ -161,6 +175,8 @@ public class GuiIngameMenu extends GuiScreen {
 	 */
 	public void drawScreen(int i, int j, float f) {
 		this.drawDefaultBackground();
+        IngameMenu.renderRotatingLogo(this.width, this.buttonList.size() > 2 ? (double)(this.buttonList.get(1).yPosition - 50f) : -100d);
+        IngameMenu.renderErrorMsgIfExists(this.width, this.height);
 		this.drawCenteredString(this.fontRendererObj, I18n.format("menu.game", new Object[0]), this.width / 2, 20,
 				16777215);
 
