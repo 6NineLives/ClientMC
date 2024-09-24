@@ -148,6 +148,21 @@ public class FontRenderer implements IResourceManagerReloadListener {
 		int l = i / 16;
 		byte b0 = 1;
 		float f = 8.0F / (float) l;
+		if (this.locationFontTexture.toString().equalsIgnoreCase("minecraft:client/font/roboto/regular.png")) {
+		    f = 5.0F / l;
+		}
+		else if (this.locationFontTexture.toString().equalsIgnoreCase("minecraft:client/font/play/regular.png")) {
+            f = 5.0F / l;
+        }
+		else if (this.locationFontTexture.toString().equalsIgnoreCase("minecraft:client/font/roboto/bold.png")) {
+            f = 5.0F / l;
+        }
+		else if (this.locationFontTexture.toString().equalsIgnoreCase("minecraft:client/font/ubuntu/medium.png")) {
+            f = 5.0F / l;
+        }
+		else if (this.locationFontTexture.toString().equalsIgnoreCase("minecraft:client/font/play/bold.png")) {
+            f = 5.0F / l;
+        }
 
 		for (int i1 = 0; i1 < 256; ++i1) {
 			int j1 = i1 % 16;

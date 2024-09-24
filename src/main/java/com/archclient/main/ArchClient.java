@@ -315,11 +315,11 @@ public class ArchClient
     }
 
     public boolean isUsingStaffModules() {
-        for (final AbstractModule acModule : this.moduleManager.staffModules) {
-            if (acModule.isStaffEnabledModule()) {
-                return true;
-            }
-        }
+        //for (final AbstractModule acModule : this.moduleManager.staffModules) {
+        //    if (acModule.isStaffEnabledModule()) {
+        //        return true;
+        //    }
+        //}
         return false;
     }
 

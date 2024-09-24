@@ -55,9 +55,9 @@ public class ModuleManager {
         this.teammatesModule = new TeammatesModule();
         this.teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI(true);
 
-        this.staffModules.add(this.xray = new XRayModule());
-        for (AbstractModule staffModule : this.staffModules) {
-            staffModule.setStaffModuleEnabled(true);
-        }
+        //this.staffModules.add(this.xray = new XRayModule());
+        //for (AbstractModule staffModule : this.staffModules) {
+        //    staffModule.setStaffModuleEnabled(true);
+        //}
     }
 }
